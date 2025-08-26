@@ -37,8 +37,8 @@ class Assets implements ModuleInterface {
 	 */
 	public function register() {
 		$this->setup_asset_vars(
-			dist_path: ENFANTTERRIBLE_MODELS_PATH . 'dist/',
-			fallback_version: ENFANTTERRIBLE_MODELS_VERSION
+			dist_path: REVISTAPOSIDONIA_CONTROL_EDITORIAL_PATH . 'dist/',
+			fallback_version: REVISTAPOSIDONIA_CONTROL_EDITORIAL_VERSION
 		);
 
 		$this->register_admin_assets();
@@ -80,8 +80,8 @@ class Assets implements ModuleInterface {
 	 */
 	public function admin_block_editor_scripts() {		
 		wp_enqueue_script(
-			'enfantterrible_models_admin',
-			ENFANTTERRIBLE_MODELS_URL . 'dist/js/block-filters.js',
+			'REVISTAPOSIDONIA_CONTROL_EDITORIAL_admin',
+			REVISTAPOSIDONIA_CONTROL_EDITORIAL_URL . 'dist/js/block-filters.js',
 			$this->get_asset_info( 'block-filters', 'dependencies' ),
 			$this->get_asset_info( 'block-filters', 'version' ),
 			true

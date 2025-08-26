@@ -37,8 +37,8 @@ class AdminAssets implements ModuleInterface {
 	 */
 	public function register() {
 		$this->setup_asset_vars(
-			dist_path: ENFANTTERRIBLE_MODELS_PATH . 'dist/',
-			fallback_version: ENFANTTERRIBLE_MODELS_VERSION
+			dist_path: REVISTAPOSIDONIA_CONTROL_EDITORIAL_PATH . 'dist/',
+			fallback_version: REVISTAPOSIDONIA_CONTROL_EDITORIAL_VERSION
 		);
 
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_scripts' ] );
@@ -55,8 +55,8 @@ class AdminAssets implements ModuleInterface {
 		
 		if ( $screen && 'fotoperiodismo_page_fotoperiodismo-tools-page' === $screen->id ) {
 			wp_enqueue_script(
-				'enfantterrible_models_fotoperiodismo_admin_page_script',
-				ENFANTTERRIBLE_MODELS_URL . 'dist/js/post-types/fotoperiodismo/admin/fotoperiodismo-admin-page.js',
+				'REVISTAPOSIDONIA_CONTROL_EDITORIAL_fotoperiodismo_admin_page_script',
+				REVISTAPOSIDONIA_CONTROL_EDITORIAL_URL . 'dist/js/post-types/fotoperiodismo/admin/fotoperiodismo-admin-page.js',
 				$this->get_asset_info( 'post-types/fotoperiodismo/admin/fotoperiodismo-admin-page', 'dependencies' ),
 				$this->get_asset_info( 'post-types/fotoperiodismo/admin/fotoperiodismo-admin-page', 'version' ),
 				true
@@ -78,8 +78,8 @@ class AdminAssets implements ModuleInterface {
 			$deps = [];
 	
 			wp_enqueue_style(
-				'enfantterrible_models_fotoperiodismo_admin_page_styles',
-				ENFANTTERRIBLE_MODELS_URL . 'dist/css/post-types/fotoperiodismo/admin/fotoperiodismo-admin-page.css', // Note the corrected file name
+				'REVISTAPOSIDONIA_CONTROL_EDITORIAL_fotoperiodismo_admin_page_styles',
+				REVISTAPOSIDONIA_CONTROL_EDITORIAL_URL . 'dist/css/post-types/fotoperiodismo/admin/fotoperiodismo-admin-page.css', // Note the corrected file name
 				$deps,
 				$this->get_asset_info( 'post-types/fotoperiodismo/admin/fotoperiodismo-admin-page', 'version' ),
 			);
