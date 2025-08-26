@@ -1,6 +1,6 @@
 <?php
 /**
- * Plugin Name:       Enfant Terrible Models
+ * Plugin Name:       Revista Posidonia - Control Editorial
  * Description:       A brief description of the plugin.
  * Version:           0.1.0
  * Requires at least: 4.9
@@ -13,7 +13,7 @@
  * Domain Path:       /languages
  * Update URI:        https://github.com/enfantterrible-ar/wp
  *
- * @package           EnfantTerribleModels
+ * @package           RevistaPosidoniaControlEditorial
  */
 
 // Useful global constants.
