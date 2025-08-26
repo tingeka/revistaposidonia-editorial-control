@@ -1,0 +1,22 @@
+{
+  "name": "revistaposidonia/control-editorial",
+  "description": "The starting point for all 10up WordPress plugins.",
+  "license": "MIT",
+  "type": "wordpress-plugin",
+  "authors": [
+    {
+      "name": "10up",
+      "email": "info@10up.com"
+    }
+  ],
+  "require": {
+    "php": ">=8.2",
+    "10up/wp-framework": "~1.2.0",
+    "monolog/monolog": "^3.9"
+  },
+  "autoload": {
+    "psr-4": {
+      "RevistaPosidonia\\ControlEditorial\\": "src/"
+    }
+  }
+}
