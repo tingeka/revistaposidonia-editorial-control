@@ -1,5 +1,5 @@
 {
-  "name": "revistaposidonia/control-editorial",
+  "name": "revistaposidonia/editorial-control",
   "description": "The starting point for all 10up WordPress plugins.",
   "license": "MIT",
   "type": "wordpress-plugin",
@@ -16,7 +16,7 @@
   },
   "autoload": {
     "psr-4": {
-      "RevistaPosidonia\\ControlEditorial\\": "src/"
+      "RevistaPosidonia\\EditorialControl\\": "src/"
     }
   }
 }

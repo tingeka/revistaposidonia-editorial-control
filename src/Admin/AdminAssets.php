@@ -2,10 +2,10 @@
 /**
  * Admin Assets module.
  *
- * @package RevistaPosidonia\ControlEditorial\Admin
+ * @package RevistaPosidonia\EditorialControl\Admin
  */
 
-namespace RevistaPosidonia\ControlEditorial\Admin;
+namespace RevistaPosidonia\EditorialControl\Admin;
 
 use TenupFramework\Assets\GetAssetInfo;
 use TenupFramework\Module;
@@ -14,7 +14,7 @@ use TenupFramework\ModuleInterface;
 /**
  * Admin Assets module.
  *
- * @package RevistaPosidonia\ControlEditorial\Admin
+ * @package RevistaPosidonia\EditorialControl\Admin
  */
 class AdminAssets implements ModuleInterface {
 
@@ -37,8 +37,8 @@ class AdminAssets implements ModuleInterface {
 	 */
 	public function register() {
 		$this->setup_asset_vars(
-			dist_path: REVISTAPOSIDONIA_CONTROL_EDITORIAL_PATH . 'dist/',
-			fallback_version: REVISTAPOSIDONIA_CONTROL_EDITORIAL_VERSION
+			dist_path: REVISTAPOSIDONIA_EDITORIAL_CONTROL_PATH . 'dist/',
+			fallback_version: REVISTAPOSIDONIA_EDITORIAL_CONTROL_VERSION
 		);
 
 		add_action( 'admin_enqueue_scripts', [ $this, 'admin_scripts' ] );
@@ -55,8 +55,8 @@ class AdminAssets implements ModuleInterface {
 		
 		if ( $screen && 'fotoperiodismo_page_fotoperiodismo-tools-page' === $screen->id ) {
 			wp_enqueue_script(
-				'REVISTAPOSIDONIA_CONTROL_EDITORIAL_fotoperiodismo_admin_page_script',
-				REVISTAPOSIDONIA_CONTROL_EDITORIAL_URL . 'dist/js/post-types/fotoperiodismo/admin/fotoperiodismo-admin-page.js',
+				'REVISTAPOSIDONIA_EDITORIAL_CONTROL_fotoperiodismo_admin_page_script',
+				REVISTAPOSIDONIA_EDITORIAL_CONTROL_URL . 'dist/js/post-types/fotoperiodismo/admin/fotoperiodismo-admin-page.js',
 				$this->get_asset_info( 'post-types/fotoperiodismo/admin/fotoperiodismo-admin-page', 'dependencies' ),
 				$this->get_asset_info( 'post-types/fotoperiodismo/admin/fotoperiodismo-admin-page', 'version' ),
 				true
@@ -78,8 +78,8 @@ class AdminAssets implements ModuleInterface {
 			$deps = [];
 	
 			wp_enqueue_style(
-				'REVISTAPOSIDONIA_CONTROL_EDITORIAL_fotoperiodismo_admin_page_styles',
-				REVISTAPOSIDONIA_CONTROL_EDITORIAL_URL . 'dist/css/post-types/fotoperiodismo/admin/fotoperiodismo-admin-page.css', // Note the corrected file name
+				'REVISTAPOSIDONIA_EDITORIAL_CONTROL_fotoperiodismo_admin_page_styles',
+				REVISTAPOSIDONIA_EDITORIAL_CONTROL_URL . 'dist/css/post-types/fotoperiodismo/admin/fotoperiodismo-admin-page.css', // Note the corrected file name
 				$deps,
 				$this->get_asset_info( 'post-types/fotoperiodismo/admin/fotoperiodismo-admin-page', 'version' ),
 			);

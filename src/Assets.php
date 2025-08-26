@@ -2,10 +2,10 @@
 /**
  * Global Assets module.
  *
- * @package RevistaPosidonia\ControlEditorial
+ * @package RevistaPosidonia\EditorialControl
  */
 
-namespace RevistaPosidonia\ControlEditorial;
+namespace RevistaPosidonia\EditorialControl;
 
 use TenupFramework\Assets\GetAssetInfo;
 use TenupFramework\Module;
@@ -14,7 +14,7 @@ use TenupFramework\ModuleInterface;
 /**
  * Global Assets module.
  *
- * @package RevistaPosidonia\ControlEditorial
+ * @package RevistaPosidonia\EditorialControl
  */
 class Assets implements ModuleInterface {
 
@@ -37,8 +37,8 @@ class Assets implements ModuleInterface {
 	 */
 	public function register() {
 		$this->setup_asset_vars(
-			dist_path: REVISTAPOSIDONIA_CONTROL_EDITORIAL_PATH . 'dist/',
-			fallback_version: REVISTAPOSIDONIA_CONTROL_EDITORIAL_VERSION
+			dist_path: REVISTAPOSIDONIA_EDITORIAL_CONTROL_PATH . 'dist/',
+			fallback_version: REVISTAPOSIDONIA_EDITORIAL_CONTROL_VERSION
 		);
 
 		$this->register_admin_assets();
@@ -80,8 +80,8 @@ class Assets implements ModuleInterface {
 	 */
 	public function admin_block_editor_scripts() {		
 		wp_enqueue_script(
-			'REVISTAPOSIDONIA_CONTROL_EDITORIAL_admin',
-			REVISTAPOSIDONIA_CONTROL_EDITORIAL_URL . 'dist/js/block-filters.js',
+			'REVISTAPOSIDONIA_EDITORIAL_CONTROL_admin',
+			REVISTAPOSIDONIA_EDITORIAL_CONTROL_URL . 'dist/js/block-filters.js',
 			$this->get_asset_info( 'block-filters', 'dependencies' ),
 			$this->get_asset_info( 'block-filters', 'version' ),
 			true

@@ -2,17 +2,17 @@
 /**
  * Demo Post Type
  *
- * @package RevistaPosidonia\ControlEditorial\Admin
+ * @package RevistaPosidonia\EditorialControl\Admin
  */
 
 declare(strict_types = 1);
 
-namespace RevistaPosidonia\ControlEditorial\Admin;
+namespace RevistaPosidonia\EditorialControl\Admin;
 
 use TenupFramework\ModuleInterface;
 use TenupFramework\Module;
 
-use RevistaPosidonia\ControlEditorial\Inc\LoggerFactory;
+use RevistaPosidonia\EditorialControl\Inc\LoggerFactory;
 use Monolog\Logger;
 
 /**
@@ -27,7 +27,7 @@ class AdminSettings implements ModuleInterface {
 	 * @return bool
 	 */
 	public function can_register() {
-		return false;
+		return true;
 	}
 
 	/**

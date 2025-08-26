@@ -2,17 +2,17 @@
 /**
  * PluginCore module.
  *
- * @package RevistaPosidonia\ControlEditorial
+ * @package RevistaPosidonia\EditorialControl
  */
 
-namespace RevistaPosidonia\ControlEditorial;
+namespace RevistaPosidonia\EditorialControl;
 
 use TenupFramework\ModuleInitialization;
 
 /**
  * PluginCore module.
  *
- * @package RevistaPosidonia\ControlEditorial
+ * @package RevistaPosidonia\EditorialControl
  */
 class PluginCore {
 
@@ -23,9 +23,9 @@ class PluginCore {
 	 */
 	public function setup() {
 		add_action( 'init', [ $this, 'i18n' ] );
-		add_action( 'init', [ $this, 'init' ], apply_filters( 'REVISTAPOSIDONIA_CONTROL_EDITORIAL_init_priority', 8 ) );
+		add_action( 'init', [ $this, 'init' ], apply_filters( 'REVISTAPOSIDONIA_EDITORIAL_CONTROL_init_priority', 8 ) );
 
-		do_action( 'REVISTAPOSIDONIA_CONTROL_EDITORIAL_loaded' );
+		do_action( 'REVISTAPOSIDONIA_EDITORIAL_CONTROL_loaded' );
 	}
 
 	/**
@@ -36,7 +36,7 @@ class PluginCore {
 	public function i18n() {
 		$locale = apply_filters( 'plugin_locale', get_locale(), 'enfantterrible-models' );
 		load_textdomain( 'enfantterrible-models', WP_LANG_DIR . '/enfantterrible-models/enfantterrible-models-' . $locale . '.mo' );
-		load_plugin_textdomain( 'enfantterrible-models', false, plugin_basename( REVISTAPOSIDONIA_CONTROL_EDITORIAL_PATH ) . '/languages/' );
+		load_plugin_textdomain( 'enfantterrible-models', false, plugin_basename( REVISTAPOSIDONIA_EDITORIAL_CONTROL_PATH ) . '/languages/' );
 	}
 
 	/**
@@ -45,7 +45,7 @@ class PluginCore {
 	 * @return void
 	 */
 	public function init() {
-		do_action( 'REVISTAPOSIDONIA_CONTROL_EDITORIAL_before_init' );
+		do_action( 'REVISTAPOSIDONIA_EDITORIAL_CONTROL_before_init' );
 
 		if ( ! class_exists( '\TenupFramework\ModuleInitialization' ) ) {
 			add_action(
@@ -68,8 +68,8 @@ class PluginCore {
 
 			return;
 		}
-		ModuleInitialization::instance()->init_classes( REVISTAPOSIDONIA_CONTROL_EDITORIAL_INC );
-		do_action( 'REVISTAPOSIDONIA_CONTROL_EDITORIAL_init' );
+		ModuleInitialization::instance()->init_classes( REVISTAPOSIDONIA_EDITORIAL_CONTROL_INC );
+		do_action( 'REVISTAPOSIDONIA_EDITORIAL_CONTROL_init' );
 	}
 
 	/**

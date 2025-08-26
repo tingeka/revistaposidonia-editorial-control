@@ -5,10 +5,10 @@
  * Provides methods to create and configure Monolog logger instances
  * with plugin-specific and global handlers.
  *
- * @package RevistaPosidonia\ControlEditorial
+ * @package RevistaPosidonia\EditorialControl
  */
 
-namespace RevistaPosidonia\ControlEditorial\Inc;
+namespace RevistaPosidonia\EditorialControl\Inc;
 
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;

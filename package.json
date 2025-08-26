@@ -1,5 +1,5 @@
 {
-  "name": "revistaposidonia-control-editorial",
+  "name": "revistaposidonia-editorial-control",
   "version": "1.0.0",
   "scripts": {
     "start": "npm run watch",
