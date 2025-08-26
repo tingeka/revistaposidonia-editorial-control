@@ -25,7 +25,7 @@ define( 'REVISTAPOSIDONIA_EDITORIAL_CONTROL_DIST_URL', REVISTAPOSIDONIA_EDITORIA
 define( 'REVISTAPOSIDONIA_EDITORIAL_CONTROL_DIST_PATH', REVISTAPOSIDONIA_EDITORIAL_CONTROL_PATH . 'dist/' );
 
 $is_local_env = in_array( wp_get_environment_type(), [ 'local', 'development' ], true );
-$is_local_url = strpos( home_url(), '.test' ) || strpos( home_url(), '.local' );
+$is_local_url = strpos( home_url(), '.test' ) || strpos( home_url(), '.local' ) || strpos( home_url(), '.site' );
 $is_local     = $is_local_env || $is_local_url;
 
 if ( $is_local && file_exists( __DIR__ . '/dist/fast-refresh.php' ) ) {
