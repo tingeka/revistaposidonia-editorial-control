@@ -1,0 +1,61 @@
+@import 'react-tabs/style/react-tabs.css';
+@import '@wordpress/components/build-style/style.css';
+
+#wpbody {
+	background-color: #fff;
+}
+
+#wpcontent {
+	padding-left: 0;
+
+	& #wpbody-content {
+		padding-bottom: 0;
+		min-height: 100%;
+	}
+}
+
+#wpfooter {
+	display: none;
+}
+
+#editorial-control-page {
+	padding: 20px;
+	background-color: #fff;
+}
+
+.react-tabs {
+	display: flex;
+	width:100%;
+
+	& .react-tabs__tab-list {
+		margin: 0;
+		min-width: 200px;
+		display: flex;
+		flex-direction: column;
+		border: none;
+	}
+
+	& .react-tabs__tab {
+		margin-bottom: 0;
+		border: none;
+		display: flex;
+		align-items: center;
+		padding:16px 8px;
+		border-radius: 0px;
+		font-weight: 500;
+		font-size: 0.9rem;
+		&--selected {
+			background-color: #f1f1f1;
+		}
+	}
+
+	& .react-tabs__tab-panel {
+		border: 1px solid #f1f1f1;
+		padding: 8px 16px;
+		width:100%;
+	}
+}
+
+.save-changes-button.components-button:hover:not(:disabled):not([aria-disabled="true"]) {
+	color: #f1f1f1;
+}

@@ -1,3 +1,3 @@
 module.exports = {
-	// 'example.': './assets/js/example.js',
+	'settings/admin-settings-page': './assets/js/settings/admin-settings-page.tsx',
 };
