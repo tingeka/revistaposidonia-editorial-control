@@ -27,7 +27,7 @@ class AdminAssets implements ModuleInterface {
 	 * @return bool
 	 */
 	public function can_register() {
-		return false;
+		return true;
 	}
 
 	/**
@@ -53,12 +53,12 @@ class AdminAssets implements ModuleInterface {
 	public function admin_scripts() {
 		$screen = get_current_screen();
 		
-		if ( $screen && 'fotoperiodismo_page_fotoperiodismo-tools-page' === $screen->id ) {
+		if ( $screen && 'toplevel_page_editorial-control-page' === $screen->id ) {
 			wp_enqueue_script(
-				'REVISTAPOSIDONIA_EDITORIAL_CONTROL_fotoperiodismo_admin_page_script',
-				REVISTAPOSIDONIA_EDITORIAL_CONTROL_URL . 'dist/js/post-types/fotoperiodismo/admin/fotoperiodismo-admin-page.js',
-				$this->get_asset_info( 'post-types/fotoperiodismo/admin/fotoperiodismo-admin-page', 'dependencies' ),
-				$this->get_asset_info( 'post-types/fotoperiodismo/admin/fotoperiodismo-admin-page', 'version' ),
+				'revistaposidonia_editorial_control_admin_settings_page',
+				REVISTAPOSIDONIA_EDITORIAL_CONTROL_URL . 'dist/js/settings/admin-settings-page.js',
+				$this->get_asset_info( 'settings/admin-settings-page', 'dependencies' ),
+				$this->get_asset_info( 'settings/admin-settings-page', 'version' ),
 				true
 			);
 		}
@@ -73,15 +73,15 @@ class AdminAssets implements ModuleInterface {
 	public function admin_styles() {
 		$screen = get_current_screen();
 
-		if ( $screen && 'fotoperiodismo_page_fotoperiodismo-tools-page' === $screen->id ) {
+		if ( $screen && 'toplevel_page_editorial-control-page' === $screen->id ) {
 			// This is the source of truth for the entire component's dependencies.
 			$deps = [];
 	
 			wp_enqueue_style(
 				'REVISTAPOSIDONIA_EDITORIAL_CONTROL_fotoperiodismo_admin_page_styles',
-				REVISTAPOSIDONIA_EDITORIAL_CONTROL_URL . 'dist/css/post-types/fotoperiodismo/admin/fotoperiodismo-admin-page.css', // Note the corrected file name
+				REVISTAPOSIDONIA_EDITORIAL_CONTROL_URL . 'dist/css/settings/admin-settings-page.css', // Note the corrected file name
 				$deps,
-				$this->get_asset_info( 'post-types/fotoperiodismo/admin/fotoperiodismo-admin-page', 'version' ),
+				$this->get_asset_info( 'settings/admin-settings-page', 'version' ),
 			);
 		}
 	}
