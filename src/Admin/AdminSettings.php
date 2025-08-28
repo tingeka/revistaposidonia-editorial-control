@@ -161,19 +161,65 @@ class AdminSettings implements ModuleInterface {
         
         return $sanitized;
     }
+    
     /**
-     * PATCH: Update settings
+     * PATCH: Update settings with proper JSON Merge Patch semantics (RFC 7396)
      */
     public function patch_settings(WP_REST_Request $request) {
         $current = get_option('revistaposidonia_editorial_control');
         $updates = $request->get_json_params();
 
-        $merged = array_replace_recursive($current, $updates);
+        $merged = $this->json_merge_patch($current, $updates);
         $sanitized = $this->sanitize_settings($merged);
 
         update_option('revistaposidonia_editorial_control', $sanitized);
 
         return $sanitized;
+    }
+
+    /**
+     * Implement JSON Merge Patch (RFC 7396) semantics
+     * 
+     * @param array $target The current data
+     * @param array $patch The patch to apply
+     * @return array The merged result
+     */
+    private function json_merge_patch($target, $patch) {
+        if (!is_array($patch)) {
+            return $patch;
+        }
+
+        if (!is_array($target)) {
+            $target = [];
+        }
+
+        foreach ($patch as $key => $value) {
+            if ($value === null) {
+                // null means remove the key (RFC 7396 spec)
+                unset($target[$key]);
+            } elseif (is_array($value) && !$this->is_indexed_array($value) && isset($target[$key]) && is_array($target[$key]) && !$this->is_indexed_array($target[$key])) {
+                // Both are associative arrays (objects) - merge recursively
+                $target[$key] = $this->json_merge_patch($target[$key], $value);
+            } else {
+                // All other cases: replace completely
+                // This includes: primitives, indexed arrays (including empty []), null-to-value, type changes
+                $target[$key] = $value;
+            }
+        }
+
+        return $target;
+    }
+
+    /**
+     * Check if array is indexed (list) vs associative (object)
+     * Important for JSON Merge Patch semantics
+     */
+    private function is_indexed_array($array) {
+        if (!is_array($array) || empty($array)) {
+            return true; // Empty arrays are treated as indexed
+        }
+        
+        return array_keys($array) === range(0, count($array) - 1);
     }
 
 }
