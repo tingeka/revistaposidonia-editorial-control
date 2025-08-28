@@ -1,3 +1,5 @@
+import { STRINGS } from './i18n';
+
 export const getEmbedUrl = (url) => {
 	if (!url) return null;
 
@@ -28,7 +30,7 @@ export const isValidUrl = (url) => {
 
 export const validateAudiovisualField = (fieldType, value) => {
 	if (fieldType === 'url' && value.trim() && !isValidUrl(value)) {
-		return 'Por favor ingrese una URL válida con protocolo (http:// o https://).';
+		return STRINGS.VALID_URL_REQUIRED;
 	}
 	return null;
 };

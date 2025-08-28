@@ -1,6 +1,9 @@
 // js/settings/components/CoverArticle.tsx
 import { ContentSearch } from "@10up/block-components";
 import { CoverArticlePreview } from "./CoverArticlePreview";
+import { STRINGS } from "../i18n";
+import { Button } from "@wordpress/components";
+import { rotateLeft } from "@wordpress/icons";
 
 export const CoverArticle = ({ articleType, label, selectedItems, onSelectItem }) => {
 	const handleSelectItem = (item) => {
@@ -21,7 +24,7 @@ export const CoverArticle = ({ articleType, label, selectedItems, onSelectItem }
 				{label}
 			</label>
 			<ContentSearch
-				placeholder="Buscar contenido..."
+				placeholder={STRINGS.SEARCH_CONTENT}
 				label={label}
 				mode="post"
 				contentTypes={['post', 'page']}

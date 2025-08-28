@@ -4,6 +4,8 @@ import { Tabs, Tab, TabList, TabPanel } from 'react-tabs';
 import { Button, Snackbar } from '@wordpress/components';
 import { CoverSettings } from './CoverSettings';
 import { useSettings } from '../hooks/useSettings';
+import { STRINGS } from '../i18n';
+
 
 export const EditorialControlSettings = () => {
 	const {
@@ -25,11 +27,10 @@ export const EditorialControlSettings = () => {
 		}
 	};
 
-	if (loading) return <p>Loading...</p>;
+	if (loading) return <p>{STRINGS.LOADING}</p>;
 
 	return (
 		<div>
-
 			<div style={{
 				display: 'flex',
 				flexDirection: 'column',
@@ -41,7 +42,7 @@ export const EditorialControlSettings = () => {
 			}}>
 				{showSavedSnackbar && (
 					<Snackbar onRemove={() => setShowSavedSnackbar(false)}>
-						Settings saved successfully!
+						{STRINGS.SETTINGS_SAVED_SUCCESS}
 					</Snackbar>
 				)}
 				<div style={{
@@ -56,7 +57,7 @@ export const EditorialControlSettings = () => {
 				}}>
 					{hasUnsavedChanges && (
 						<span style={{ fontSize: '0.875rem', color: '#d63638', textWrap: 'nowrap' }}>
-							Unsaved changes
+							{STRINGS.UNSAVED_CHANGES}
 						</span>
 					)}
 
@@ -67,15 +68,14 @@ export const EditorialControlSettings = () => {
 						isBusy={saving}
 						className='save-changes-button'
 					>
-						{saving ? 'Saving...' : 'Save Changes'}
+						{saving ? STRINGS.SAVING : STRINGS.SAVE_CHANGES}
 					</Button>
 				</div>
-
 			</div>
 
 			<Tabs>
 				<TabList>
-					<Tab>Portada</Tab>
+					<Tab>{STRINGS.COVER}</Tab>
 				</TabList>
 
 				<TabPanel>

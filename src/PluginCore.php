@@ -22,10 +22,10 @@ class PluginCore {
 	 * @return void
 	 */
 	public function setup() {
-		add_action( 'init', [ $this, 'i18n' ] );
-		add_action( 'init', [ $this, 'init' ], apply_filters( 'REVISTAPOSIDONIA_EDITORIAL_CONTROL_init_priority', 8 ) );
+		add_action( 'init', [ $this, 'i18n' ], 8 );
+		add_action( 'init', [ $this, 'init' ], apply_filters( 'revistaposidonia_editorial_control_init_priority', 8 ) );
 
-		do_action( 'REVISTAPOSIDONIA_EDITORIAL_CONTROL_loaded' );
+		do_action( 'revistaposidonia_editorial_control_loaded' );
 	}
 
 	/**
@@ -34,18 +34,17 @@ class PluginCore {
 	 * @return void
 	 */
 	public function i18n() {
-		$locale = apply_filters( 'plugin_locale', get_locale(), 'enfantterrible-models' );
-		load_textdomain( 'enfantterrible-models', WP_LANG_DIR . '/enfantterrible-models/enfantterrible-models-' . $locale . '.mo' );
-		load_plugin_textdomain( 'enfantterrible-models', false, plugin_basename( REVISTAPOSIDONIA_EDITORIAL_CONTROL_PATH ) . '/languages/' );
+		$locale = apply_filters( 'plugin_locale', get_locale(), 'revistaposidonia-editorial-control' );
+		load_textdomain( 'revistaposidonia-editorial-control', WP_LANG_DIR . '/revistaposidonia-editorial-control/revistaposidonia-editorial-control-' . $locale . '.mo' );
+		load_plugin_textdomain( 'revistaposidonia-editorial-control', false, plugin_basename( REVISTAPOSIDONIA_EDITORIAL_CONTROL_PATH ) . '/languages/' );
 	}
-
 	/**
 	 * Initializes the plugin and fires an action other plugins can hook into.
 	 *
 	 * @return void
 	 */
 	public function init() {
-		do_action( 'REVISTAPOSIDONIA_EDITORIAL_CONTROL_before_init' );
+		do_action( 'revistaposidonia_editorial_control_before_init' );
 
 		if ( ! class_exists( '\TenupFramework\ModuleInitialization' ) ) {
 			add_action(
@@ -69,7 +68,7 @@ class PluginCore {
 			return;
 		}
 		ModuleInitialization::instance()->init_classes( REVISTAPOSIDONIA_EDITORIAL_CONTROL_INC );
-		do_action( 'REVISTAPOSIDONIA_EDITORIAL_CONTROL_init' );
+		do_action( 'revistaposidonia_editorial_control_init' );
 	}
 
 	/**

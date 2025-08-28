@@ -1,3 +1,4 @@
+import { STRINGS } from "../i18n";
 export const CoverAudiovisualPreview = ({ titulo, desc, url }) => {
     const getEmbedUrl = (url) => {
         if (!url) return null;
@@ -21,7 +22,7 @@ export const CoverAudiovisualPreview = ({ titulo, desc, url }) => {
     const embedUrl = getEmbedUrl(url);
 
     if (!titulo && !desc && !url) {
-        return <p style={{ fontStyle: 'italic', color: '#666' }}>No hay contenido audiovisual.</p>;
+        return <p style={{ fontStyle: 'italic', color: '#666' }}>{STRINGS.NO_AUDIOVISUAL_CONTENT}</p>;
     }
 
     return (
@@ -51,9 +52,14 @@ export const CoverAudiovisualPreview = ({ titulo, desc, url }) => {
                         background: '#fff3cd',
                         border: '1px solid #ffeeba',
                         color: '#856404',
+                        width: '50%',
+                        wordBreak: 'break-word',
+                        display: 'flex',
+                        alignItems: 'center',
+                        justifyContent: 'center',
                     }}
                 >
-                    URL no compatible para incrustar: {url}
+                    {STRINGS.EMBED_URL_NOT_COMPATIBLE}: {url}
                 </div>
             ) : null}
 			<div 

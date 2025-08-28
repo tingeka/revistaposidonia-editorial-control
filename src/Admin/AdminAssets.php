@@ -54,12 +54,21 @@ class AdminAssets implements ModuleInterface {
 		$screen = get_current_screen();
 		
 		if ( $screen && 'toplevel_page_editorial-control-page' === $screen->id ) {
+			$handle = 'revistaposidonia_editorial_control_admin_settings_page';
+			
 			wp_enqueue_script(
-				'revistaposidonia_editorial_control_admin_settings_page',
+				$handle,
 				REVISTAPOSIDONIA_EDITORIAL_CONTROL_URL . 'dist/js/settings/admin-settings-page.js',
 				$this->get_asset_info( 'settings/admin-settings-page', 'dependencies' ),
 				$this->get_asset_info( 'settings/admin-settings-page', 'version' ),
 				true
+			);
+
+			// Set up JavaScript translations
+			wp_set_script_translations(
+				$handle,
+				'revistaposidonia-editorial-control',
+				REVISTAPOSIDONIA_EDITORIAL_CONTROL_PATH . 'languages'
 			);
 		}
 

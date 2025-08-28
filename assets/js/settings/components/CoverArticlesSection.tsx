@@ -1,16 +1,17 @@
 // js/settings/components/CoverArticleSection.tsx
 import { CoverArticle } from './CoverArticle';
+import { STRINGS } from '../i18n';
 
 const ARTICLE_TYPES = [
-	{ key: 'article_primary', label: 'Articulo Primario' },
-	{ key: 'article_secondary', label: 'Articulo Secundario' },
-	{ key: 'article_tertiary', label: 'Articulo Terciario' },
+	{ key: 'article_primary', label: STRINGS.ARTICLE_PRIMARY },
+	{ key: 'article_secondary', label: STRINGS.ARTICLE_SECONDARY },
+	{ key: 'article_tertiary', label: STRINGS.ARTICLE_TERTIARY },
 ];
 
 export const CoverArticlesSection = ({ settings, onUpdateArticle }) => {
 	return (
 		<div>
-			<h2>Artículos de tapa</h2>
+			<h2>{STRINGS.COVER_ARTICLES}</h2>
 			<div style={{ display: 'flex', gap: '1rem' }}>
 				{ARTICLE_TYPES.map(({ key, label }) => (
 					<CoverArticle

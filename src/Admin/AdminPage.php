@@ -30,8 +30,8 @@ class AdminPage implements ModuleInterface {
 
 	public function __construct() {
 		$args       = [
-			'page_title' => 'Editorial Control',
-			'menu_title' => 'Editorial Control',
+			'page_title' => __( 'Editorial Control', 'revistaposidonia-editorial-control' ),
+			'menu_title' => __( 'Editorial Control', 'revistaposidonia-editorial-control' ),
 			'capability' => 'manage_options',
 			'menu_slug'  => 'editorial-control-page',
 			'icon'       => 'dashicons-admin-generic',
