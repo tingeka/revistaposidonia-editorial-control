@@ -68,6 +68,9 @@ class PluginCore {
 			return;
 		}
 		ModuleInitialization::instance()->init_classes( REVISTAPOSIDONIA_EDITORIAL_CONTROL_INC );
+
+		require_once REVISTAPOSIDONIA_EDITORIAL_CONTROL_PATH . 'src/Inc/GlobalHelpers.php';
+		
 		do_action( 'revistaposidonia_editorial_control_init' );
 	}
 
