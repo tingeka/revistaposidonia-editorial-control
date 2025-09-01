@@ -38,14 +38,18 @@ class AdminSettings implements ModuleInterface {
 	 * @return void
 	 */
     public function register() {
-        $this->register_settings();
-        $this->register_rest_routes();
+        $this->register_hooks();
+    }
+
+    public function register_hooks() {
+        add_action('admin_init', [$this, 'register_settings']);
+        add_action('rest_api_init', [$this, 'register_rest_routes']);
     }
 
     /**
      * Register the single option in wp_options
      */
-    private function register_settings() {
+    public function register_settings() {
         register_setting('revistaposidonia_editorial_control', 'revistaposidonia_editorial_control', [
             'type'              => 'object',
             'sanitize_callback' => [$this, 'sanitize_settings'],
@@ -94,7 +98,7 @@ class AdminSettings implements ModuleInterface {
     /**
      * Register custom REST route
      */
-    private function register_rest_routes() {
+    public function register_rest_routes() {
         $settings_schema = [
             'type' => 'object',
             'properties' => [
