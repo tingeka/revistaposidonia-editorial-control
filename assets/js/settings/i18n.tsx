@@ -1,9 +1,6 @@
 // js/settings/i18n.js
 import { __ } from '@wordpress/i18n';
 
-// Set up the text domain for this script
-import { setLocaleData } from '@wordpress/i18n';
-
 // This will be populated by WordPress with the actual translations
 if (window.wp && window.wp.i18n) {
     // Set the text domain for this script
