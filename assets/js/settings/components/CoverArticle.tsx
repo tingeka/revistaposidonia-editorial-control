@@ -4,9 +4,10 @@ import { CoverArticlePreview } from "./CoverArticlePreview";
 import { STRINGS } from "../i18n";
 import { Button } from "@wordpress/components";
 import { rotateLeft } from "@wordpress/icons";
+import { CoverArticleItem, CoverArticleProps } from '../types';
 
-export const CoverArticle = ({ articleType, label, selectedItems, onSelectItem }) => {
-	const handleSelectItem = (item) => {
+export const CoverArticle = ({ label, selectedItems, onSelectItem }: CoverArticleProps) => {
+	const handleSelectItem = (item: CoverArticleItem) => {
 		onSelectItem([item]);
 	};
 

@@ -1,6 +1,7 @@
 import { STRINGS } from './i18n';
+import { CoverValidationFieldType, CoverValidationResult } from './types';
 
-export const getEmbedUrl = (url) => {
+export const getEmbedUrl = (url: string): string | null => {
 	if (!url) return null;
 
 	if (url.includes('youtube.com/watch?v=')) {
@@ -19,7 +20,7 @@ export const getEmbedUrl = (url) => {
 	return null;
 };
 
-export const isValidUrl = (url) => {
+export const isValidUrl = (url: string): boolean => {
 	try {
 		new URL(url);
 		return true;
@@ -28,7 +29,7 @@ export const isValidUrl = (url) => {
 	}
 };
 
-export const validateAudiovisualField = (fieldType, value) => {
+export const validateAudiovisualField = (fieldType: CoverValidationFieldType, value: string): CoverValidationResult => {
 	if (fieldType === 'url' && value.trim() && !isValidUrl(value)) {
 		return STRINGS.VALID_URL_REQUIRED;
 	}

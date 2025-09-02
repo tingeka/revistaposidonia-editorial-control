@@ -2,16 +2,17 @@
 import { CoverAudiovisual } from './CoverAudiovisual';
 import { CoverAudiovisualPreview } from './CoverAudiovisualPreview';
 import { STRINGS } from '../i18n';
+import { CoverAudiovisualSectionProps, CoverAudiovisualField } from '../types';
 
-const AUDIOVISUAL_FIELDS = [
+const AUDIOVISUAL_FIELDS: CoverAudiovisualField[] = [
 	{ key: 'title', label: STRINGS.VIDEO_TITLE, type: 'text' },
 	{ key: 'url', label: STRINGS.VIDEO_URL, type: 'url' },
 	{ key: 'desc', label: STRINGS.VIDEO_DESCRIPTION, type: 'textarea' },
 ];
 
-export const CoverAudiovisualSection = ({ settings, onUpdateAudiovisual }) => {
+export const CoverAudiovisualSection = ({ settings, onUpdateAudiovisual }: CoverAudiovisualSectionProps) => {
   const hasAudiovisualData = AUDIOVISUAL_FIELDS.some(
-    (field) => !!settings[field.key] && settings[field.key].toString().trim() !== ''
+    (field) => !!settings[field.key] && settings[field.key]?.toString().trim() !== ''
   );
 
   return (
@@ -21,11 +22,10 @@ export const CoverAudiovisualSection = ({ settings, onUpdateAudiovisual }) => {
         {AUDIOVISUAL_FIELDS.map(({ key, label, type }) => (
           <CoverAudiovisual
             key={key}
-            fieldKey={key}
             label={label}
             type={type}
             value={settings[key] || ''}
-            onChange={(value) => onUpdateAudiovisual(key, value)}
+            onChange={(value: string) => onUpdateAudiovisual(key, value)}
           />
         ))}
 

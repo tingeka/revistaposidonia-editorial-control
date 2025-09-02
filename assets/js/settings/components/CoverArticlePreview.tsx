@@ -1,26 +1,7 @@
 import { useEntityRecords } from "@wordpress/core-data";
+import { CoverArticlePreviewProps, WPPost } from "../types";
 
-interface WPAuthor {
-	id: number;
-	name: string;
-}
-
-interface WPFeaturedMedia {
-	source_url: string;
-}
-
-interface WPPost {
-	id: number;
-	title: { rendered: string };
-	link: string;
-	date: string;
-	_embedded?: {
-		author?: WPAuthor[];
-		'wp:featuredmedia'?: WPFeaturedMedia[];
-	};
-}
-
-export const CoverArticlePreview = ({ postId }: { postId: number }) => {
+export const CoverArticlePreview = ({ postId }: CoverArticlePreviewProps) => {
 	// Use only WPPost as type argument
 	const posts = useEntityRecords<WPPost>('postType', 'post', {
 		include: postId ? [postId] : [],

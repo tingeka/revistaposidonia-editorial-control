@@ -3,11 +3,12 @@ import { useState } from '@wordpress/element';
 import { TextareaControl, TextControl } from '@wordpress/components';
 import { validateAudiovisualField } from '../utils';
 import { CSSProperties } from 'react';
+import { CoverAudiovisualProps } from '../types';
 
-export const CoverAudiovisual = ({ fieldKey, label, type, value, onChange }) => {
+export const CoverAudiovisual = ({ label, type, value, onChange }: CoverAudiovisualProps) => {
 	const [error, setError] = useState<string | null>(null);
 
-	const handleChange = (val) => {
+	const handleChange = (val: string) => {
 		const validationError = validateAudiovisualField(type, val);
 		setError(validationError);
 		onChange(val);

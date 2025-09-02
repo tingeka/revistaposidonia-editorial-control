@@ -1,26 +1,27 @@
 // js/settings/hooks/useSettings.tsx
 import { useState, useEffect, useCallback } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
+import { Settings, UseSettingsReturn, CoverArticleItem, CoverAudiovisualSettings, CoverArticleTypeKey, SettingsKey, SettingUpdates } from '../types';
 
-interface CoverSettings {
-    articles?: Record<string, any>;
-    audiovisual?: Record<string, any>;
-}
+// Default structure that matches backend contract
+const DEFAULT_SETTINGS: Settings = {
+	cover: {
+		articles: {
+			article_primary: [],
+			article_secondary: [],
+			article_tertiary: []
+		},
+		audiovisual: {
+			title: '',
+			url: '',
+			desc: ''
+		}
+	}
+};
 
-interface Settings {
-    cover?: CoverSettings;
-    [key: string]: any;
-}
-
-declare global {
-    interface Window {
-        wpApiSettings: { nonce: string };
-    }
-}
-
-export const useSettings = () => {
-	const [settings, setSettings] = useState<Settings>({});
-	const [originalSettings, setOriginalSettings] = useState<Settings>({});
+export const useSettings = (): UseSettingsReturn => {
+	const [settings, setSettings] = useState<Settings>(DEFAULT_SETTINGS);
+	const [originalSettings, setOriginalSettings] = useState<Settings>(DEFAULT_SETTINGS);
 	const [loading, setLoading] = useState(true);
 	const [saving, setSaving] = useState(false);
 
@@ -37,7 +38,7 @@ export const useSettings = () => {
 	// Check if there are unsaved changes
 	const hasUnsavedChanges = JSON.stringify(settings) !== JSON.stringify(originalSettings);
 
-	const updateSetting = useCallback((section, updates) => {
+	const updateSetting = useCallback((section: SettingsKey, updates: SettingUpdates) => {
 		const updatedSettings = {
 			...settings,
 			[section]: { ...settings[section], ...updates }
@@ -60,13 +61,12 @@ export const useSettings = () => {
 			});
 
 			if (!response.ok) throw new Error(await response.text());
-			const savedData = await response.json();
-			
+			const savedData: Settings = await response.json();
 			setSettings(savedData);
 			setOriginalSettings(savedData);
 			
 			return true;
-		} catch (err) {
+		} catch (err: unknown) {
 			console.error(err);
 			return false;
 		} finally {
@@ -75,7 +75,7 @@ export const useSettings = () => {
 	}, [settings]);
 
 	// Convenience methods for specific updates
-	const updateArticle = useCallback((articleType, items) => {
+	const updateArticle = useCallback((articleType: CoverArticleTypeKey, items: CoverArticleItem[]) => {
 		const currentCover = settings.cover || {};
 		updateSetting('cover', {
 			...currentCover,
@@ -86,7 +86,7 @@ export const useSettings = () => {
 		});
 	}, [settings.cover, updateSetting]);
 
-	const updateAudiovisual = useCallback((field, value) => {
+	const updateAudiovisual = useCallback((field: keyof CoverAudiovisualSettings, value: string) => {
 		const currentCover = settings.cover || {};
 		updateSetting('cover', {
 			...currentCover,

@@ -1,0 +1,19 @@
+{
+  "compilerOptions": {
+    "target": "ES2020",              // modern JS output
+    "module": "ESNext",              // support ES modules (import/export)
+    "lib": ["DOM", "ES2020"],        // include browser + ES features
+    "jsx": "react",                  // for .tsx files
+    "strict": true,                  // enable strict type-checking
+    "esModuleInterop": true,         // allow default imports from commonjs modules
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,            // skip type-checking of node_modules
+    "moduleResolution": "node",      // module resolution strategy
+    "resolveJsonModule": true,       // allow import of JSON
+    "allowUmdGlobalAccess": true,
+  },
+  "include": [
+    "assets/js/**/*",
+	  "global.d.ts",
+  ]
+}

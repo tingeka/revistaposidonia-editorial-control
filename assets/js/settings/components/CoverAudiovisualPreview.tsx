@@ -1,25 +1,10 @@
 import { STRINGS } from "../i18n";
-export const CoverAudiovisualPreview = ({ titulo, desc, url }) => {
-    const getEmbedUrl = (url) => {
-        if (!url) return null;
+import { getEmbedUrl } from '../utils';
+import { CoverAudiovisualPreviewProps } from '../types';
 
-        if (url.includes('youtube.com/watch?v=')) {
-            const videoId = url.split('v=')[1]?.split('&')[0];
-            return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
-        }
-        if (url.includes('youtu.be/')) {
-            const videoId = url.split('youtu.be/')[1]?.split('?')[0];
-            return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
-        }
-        if (url.includes('vimeo.com/')) {
-            const videoId = url.split('vimeo.com/')[1]?.split('?')[0];
-            return videoId ? `https://player.vimeo.com/video/${videoId}` : null;
-        }
-
-        return null;
-    };
-
-    const embedUrl = getEmbedUrl(url);
+export const CoverAudiovisualPreview = ({ titulo, desc, url }: CoverAudiovisualPreviewProps) => {
+    
+    const embedUrl = url ? getEmbedUrl(url) : undefined;
 
     if (!titulo && !desc && !url) {
         return <p style={{ fontStyle: 'italic', color: '#666' }}>{STRINGS.NO_AUDIOVISUAL_CONTENT}</p>;
