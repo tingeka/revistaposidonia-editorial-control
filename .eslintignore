@@ -4,3 +4,4 @@ assets/js/frontend/vendor
 assets/js/settings/types/index.ts
 tests
 dist
+bin
