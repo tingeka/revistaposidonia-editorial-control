@@ -1,8 +1,14 @@
 {
   "extends": "@10up/eslint-config/wordpress",
-  "rules": {},
   "globals": {
     "module": true,
     "process": true
+  },
+  "rules": {
+    "prettier/prettier": ["error", {
+      "useTabs": true,
+      "tabWidth": 1,
+      "endOfLine": "lf"
+    }]
   }
 }
