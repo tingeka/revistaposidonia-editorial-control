@@ -1,20 +1,38 @@
+import { AUDIOVISUAL_FIELDS } from './constants';
 import { STRINGS } from './i18n';
-import { CoverValidationFieldType, CoverValidationResult } from './types';
+import { CoverAudiovisualSettings, ValidationFieldType, ValidationResult } from './types';
 
 export const getEmbedUrl = (url: string): string | null => {
 	if (!url) return null;
 
-	if (url.includes('youtube.com/watch?v=')) {
-		const videoId = url.split('v=')[1]?.split('&')[0];
-		return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+	let parsed: URL;
+	try {
+		parsed = new URL(url); // only this can realistically throw
+	} catch {
+		return null; // fail gracefully for invalid URLs
 	}
-	if (url.includes('youtu.be/')) {
-		const videoId = url.split('youtu.be/')[1]?.split('?')[0];
-		return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+
+	if (parsed.hostname.includes('youtube.com')) {
+		const videoId = parsed.searchParams.get('v');
+		if (!videoId) return null;
+
+		return `https://www.youtube.com/embed/${videoId}`;
 	}
-	if (url.includes('vimeo.com/')) {
-		const videoId = url.split('vimeo.com/')[1]?.split('?')[0];
-		return videoId ? `https://player.vimeo.com/video/${videoId}` : null;
+
+	// YouTube short URLs
+	if (parsed.hostname === 'youtu.be') {
+		const videoId = parsed.pathname.slice(1); // remove leading '/'
+		if (!videoId) return null;
+
+		return `https://www.youtube.com/embed/${videoId}`;
+	}
+
+	// Vimeo URLs
+	if (parsed.hostname.includes('vimeo.com')) {
+		const videoId = parsed.pathname.split('/')[1];
+		if (!videoId) return null;
+
+		return `https://player.vimeo.com/video/${videoId}`;
 	}
 
 	return null;
@@ -22,16 +40,24 @@ export const getEmbedUrl = (url: string): string | null => {
 
 export const isValidUrl = (url: string): boolean => {
 	try {
-		new URL(url);
+		const parsed = new URL(url);
+		// hostname must be non-empty and contain at least one alphanumeric character
+		if (!parsed.hostname || !/[a-z0-9]/i.test(parsed.hostname)) {
+			return false;
+		}
 		return true;
 	} catch {
-		return false;
+		return false; // syntactically invalid URLs
 	}
 };
 
-export const validateAudiovisualField = (fieldType: CoverValidationFieldType, value: string): CoverValidationResult => {
+
+export const validateAudiovisualField = (fieldType: ValidationFieldType, value: string): ValidationResult => {
 	if (fieldType === 'url' && value.trim() && !isValidUrl(value)) {
 		return STRINGS.VALID_URL_REQUIRED;
 	}
 	return null;
 };
+
+export const hasAudiovisualContent = (settings: CoverAudiovisualSettings): boolean => 
+  AUDIOVISUAL_FIELDS.some(field => !!settings[field.key]?.trim());
