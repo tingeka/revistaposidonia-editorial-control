@@ -1,13 +1,51 @@
-// src/admin-settings.js
-import domReady from '@wordpress/dom-ready';
-import { createRoot } from '@wordpress/element';
-import { EditorialControlSettings } from './components/EditorialControlSettings';
+// assets/js/settings/admin-settings-page.tsx
 import '../../css/settings/admin-settings-page.scss';
 
-domReady(() => {
-	const rootEl = document.getElementById('editorial-control-page');
-	if (!rootEl) return;
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 
-	const root = createRoot(rootEl);
-	root.render(<EditorialControlSettings />);
+import domReady from '@wordpress/dom-ready';
+import { createRoot } from '@wordpress/element';
+
+import { SaveSettingsBar } from './components/features';
+import { CoverPanel } from './components/panels';
+import { useSettings, useSettingsUpdaters } from './hooks';
+import { STRINGS } from './lib/i18n';
+
+// Main React app component
+const EditorialControlApp = () => {
+  const { settings, loading, saving, hasUnsavedChanges, updateSetting, saveSettings } = useSettings();
+  const { cover: coverUpdaters } = useSettingsUpdaters(updateSetting);
+  
+  if (loading) return <p>{STRINGS.LOADING}</p>;
+
+  return (
+    <div className="rp-ecs-container">
+      <Tabs>
+        <TabList>
+          <Tab>{STRINGS.COVER}</Tab>
+        </TabList>
+        <TabPanel>
+          <CoverPanel
+            settings={settings.cover}
+            updaters={coverUpdaters}
+          />
+        </TabPanel>
+      </Tabs>
+
+      <SaveSettingsBar
+        hasUnsavedChanges={hasUnsavedChanges}
+        saving={saving}
+        saveSettings={saveSettings}
+      />
+    </div>
+  );
+};
+
+// DOM setup
+domReady(() => {
+  const rootEl = document.getElementById('editorial-control-page');
+  if (!rootEl) return;
+
+  const root = createRoot(rootEl);
+  root.render(<EditorialControlApp />);
 });

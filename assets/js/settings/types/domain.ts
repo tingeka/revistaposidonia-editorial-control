@@ -1,4 +1,4 @@
-
+// assets/js/settings/types/domain.ts
 /**
  * Settings domain
  */
@@ -46,7 +46,7 @@ export interface CoverAudiovisualSettings {
 /**
  * Article section configuration for constants
  */
-export interface CoverArticleConfig {
+export type CoverArticleConfig = {
   key: keyof CoverArticlesSettings;  // 'article_primary' | 'article_secondary' | 'article_tertiary'
   label: string;
 }
@@ -54,7 +54,7 @@ export interface CoverArticleConfig {
 /**
  * Form field configuration for audiovisual settings
  */
-export interface CoverAudiovisualFieldConfig {
+export type CoverAudiovisualFieldConfig = {
   key: keyof CoverAudiovisualSettings;
   label: string;
   type: 'text' | 'url' | 'textarea';

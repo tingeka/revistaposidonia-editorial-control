@@ -1,11 +1,11 @@
-// js/settings/components/ArticlePicker.tsx
+// assets/js/settings/components/ArticlePicker.tsx
 
 import { ContentSearch } from '@10up/block-components';
 import { Button } from '@wordpress/components';
 import { rotateLeft } from '@wordpress/icons';
 
 import { usePickedArticle } from '../../hooks';
-import { STRINGS } from '../../i18n';
+import { STRINGS } from '../../lib/i18n';
 import { CoverArticleItem } from '../../types';
 import { Preview } from '../ui';
 

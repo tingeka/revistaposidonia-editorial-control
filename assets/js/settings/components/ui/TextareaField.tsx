@@ -3,7 +3,7 @@ import { TextareaControl } from '@wordpress/components';
 
 import { BaseField } from './BaseField';
 
-type TextareaFieldProps = {
+interface TextareaFieldProps {
   label: string;
   value: string;
   onChange: (val: string) => void;

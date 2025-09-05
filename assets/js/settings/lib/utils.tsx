@@ -1,6 +1,7 @@
+// assets/js/settings/utils.tsx
+import { CoverAudiovisualSettings, ValidationFieldType, ValidationResult } from '../types';
 import { AUDIOVISUAL_FIELDS } from './constants';
 import { STRINGS } from './i18n';
-import { CoverAudiovisualSettings, ValidationFieldType, ValidationResult } from './types';
 
 export const getEmbedUrl = (url: string): string | null => {
 	if (!url) return null;

@@ -1,4 +1,5 @@
-type PreviewProps = {
+// assets/js/settings/components/Preview.tsx
+interface PreviewProps {
   className?: string;
   children: React.ReactNode;
 };

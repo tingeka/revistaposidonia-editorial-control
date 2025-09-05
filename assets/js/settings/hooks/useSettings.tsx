@@ -1,4 +1,4 @@
-// // js/settings/hooks/useSettings.tsx
+// assets/js/settings/hooks/useSettings.tsx
 import apiFetch from '@wordpress/api-fetch';
 import { useCallback, useEffect, useState } from '@wordpress/element';
 

@@ -1,7 +1,7 @@
-// components/ui/BaseField.tsx
+// assets/js/settings/components/ui/BaseField.tsx
 import { useState } from '@wordpress/element';
 
-type BaseFieldProps<T> = {
+interface BaseFieldProps<T> {
   label: string;
   value: T;
   onChange: (val: T) => void;
@@ -12,7 +12,7 @@ type BaseFieldProps<T> = {
     onChange: (val: T) => void;
     help?: string;
   }) => React.ReactNode;
-};
+}
 
 export const BaseField = <T,>({
   label,

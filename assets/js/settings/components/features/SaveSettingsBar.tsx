@@ -1,9 +1,9 @@
-// js/settings/components/SaveSettingsBar.tsx
+// assets/js/settings/components/SaveSettingsBar.tsx
 
 import { Button, Snackbar } from '@wordpress/components';
 import { useState } from '@wordpress/element';
 
-import { STRINGS } from '../i18n';
+import { STRINGS } from '../../lib/i18n';
 
 type SaveSettingsBarProps = {
 	hasUnsavedChanges: boolean;

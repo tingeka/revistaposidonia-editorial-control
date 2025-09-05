@@ -1,3 +1,4 @@
+// assets/js/settings/types/props.ts
 import {
     CoverArticleItem, CoverArticlesSettings, CoverAudiovisualSettings, CoverSettings
 } from './domain';

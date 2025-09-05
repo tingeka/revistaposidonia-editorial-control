@@ -3,7 +3,7 @@ import { TextControl } from '@wordpress/components';
 
 import { BaseField } from './BaseField';
 
-type UrlFieldProps = {
+interface UrlFieldProps {
   label: string;
   value: string;
   onChange: (val: string) => void;

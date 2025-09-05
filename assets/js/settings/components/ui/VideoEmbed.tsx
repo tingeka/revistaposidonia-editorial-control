@@ -1,9 +1,9 @@
 // assets/js/settings/components/ui/VideoEmbed.tsx
 
-import { STRINGS } from '../../i18n';
-import { getEmbedUrl } from '../../utils';
+import { STRINGS } from '../../lib/i18n';
+import { getEmbedUrl } from '../../lib/utils';
 
-type VideoEmbedProps = {
+interface VideoEmbedProps {
   url: string;
   className?: string;
   style?: React.CSSProperties;

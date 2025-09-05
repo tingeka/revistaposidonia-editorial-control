@@ -1,3 +1,4 @@
+// assets/js/settings/types/wp.ts
 // Core WordPress entities
 export interface WPAuthor {
   id: number;

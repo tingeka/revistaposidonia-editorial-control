@@ -1,9 +1,9 @@
-// js/settings/components/CoverSettings.tsx
+// assets/js/settings/components/CoverSettings.tsx
 
-import { ARTICLE_TYPES } from '../../constants';
-import { STRINGS } from '../../i18n';
+import { ARTICLE_TYPES } from '../../lib/constants';
+import { STRINGS } from '../../lib/i18n';
+import { hasAudiovisualContent, validateAudiovisualField } from '../../lib/utils';
 import { CoverSettingsProps } from '../../types';
-import { hasAudiovisualContent, validateAudiovisualField } from '../../utils';
 import { ArticlePicker } from '../features';
 import { Preview, Section, TextareaField, TextField, UrlField, VideoEmbed } from '../ui';
 

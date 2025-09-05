@@ -1,11 +1,5 @@
-// js/settings/i18n.js
+// assets/js/settings/i18n.js
 import { __ } from '@wordpress/i18n';
-
-// This will be populated by WordPress with the actual translations
-if (window.wp && window.wp.i18n) {
-    // Set the text domain for this script
-    window.wp.i18n.setLocaleData({}, 'revistaposidonia-editorial-control');
-}
 
 // Export commonly used strings as constants for consistency
 export const STRINGS = {

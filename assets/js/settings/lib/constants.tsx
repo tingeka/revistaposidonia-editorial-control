@@ -1,6 +1,6 @@
 // assets/js/settings/constants.tsx
+import { CoverArticleConfig, CoverAudiovisualFieldConfig } from '../types';
 import { STRINGS } from './i18n';
-import { CoverArticleConfig, CoverAudiovisualFieldConfig } from './types';
 
 export const ARTICLE_TYPES: CoverArticleConfig[] = [
   { key: 'article_primary', label: STRINGS.ARTICLE_PRIMARY },
