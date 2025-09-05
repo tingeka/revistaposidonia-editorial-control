@@ -3,8 +3,8 @@ import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 
 import { useSettings, useSettingsUpdaters } from '../hooks';
 import { STRINGS } from '../i18n';
+import { SaveSettingsBar } from './features';
 import { CoverPanel } from './panels';
-import { SaveSettingsBar } from './SaveSettingsBar';
 
 export const EditorialControlSettings = () => {
   const { settings, loading, saving, hasUnsavedChanges, updateSetting, saveSettings } = useSettings();
