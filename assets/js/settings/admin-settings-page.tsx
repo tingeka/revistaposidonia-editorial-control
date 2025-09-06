@@ -3,6 +3,7 @@ import '../../css/settings/admin-settings-page.scss';
 
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs';
 
+import { ProgressBar } from '@wordpress/components';
 import domReady from '@wordpress/dom-ready';
 import { createRoot } from '@wordpress/element';
 
@@ -16,7 +17,14 @@ const EditorialControlApp = () => {
   const { settings, loading, saving, hasUnsavedChanges, updateSetting, saveSettings } = useSettings();
   const { cover: coverUpdaters } = useSettingsUpdaters(updateSetting);
   
-  if (loading) return <p>{STRINGS.LOADING}</p>;
+  if (loading) {
+		return (
+			<div className='rp-ecs-loading-container'>
+				<ProgressBar className='rp-ecs-loading-bar' />
+				<p className='rp-ecs-loading-text'>{STRINGS.LOADING}</p>
+			</div>
+		);
+	}
 
   return (
     <div className="rp-ecs-container">
