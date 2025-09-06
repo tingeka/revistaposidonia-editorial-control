@@ -1,26 +1,26 @@
 // assets/js/settings/components/ArticlePicker.tsx
 
 import { ContentSearch } from '@10up/block-components';
-import { Button } from '@wordpress/components';
+import { Button, ProgressBar } from '@wordpress/components';
 import { rotateLeft } from '@wordpress/icons';
 
 import { usePickedArticle } from '../../hooks';
 import { STRINGS } from '../../lib/i18n';
-import { CoverArticleItem } from '../../types';
+import { ArticleItem } from '../../types';
 import { Preview } from '../ui';
 
 interface ArticlePickerProps {
 	label: string;
-	selectedItems: CoverArticleItem[];
-	onSelectItem: (items: CoverArticleItem[]) => void;
+	selectedItems: ArticleItem[];
+	onSelectItem: (items: ArticleItem[]) => void;
 }
 
 export const ArticlePicker = ({ label, selectedItems, onSelectItem }: ArticlePickerProps) => {
 	// console.log(selectedItems);
 	const [selectedPost] = selectedItems;
-  const { post, featuredMediaUrl, authorName, isLoading } = usePickedArticle(selectedPost);
+  const { picked, isLoading } = usePickedArticle(selectedPost);
 	
-	const handleSelectItem = (item: CoverArticleItem) => onSelectItem([item]);
+	const handleSelectItem = (item: ArticleItem) => onSelectItem([item]);
 	const handleRemoveItem = () => onSelectItem([]);
 
 	return (
@@ -49,28 +49,28 @@ export const ArticlePicker = ({ label, selectedItems, onSelectItem }: ArticlePic
 			/>
 
 			{isLoading ? (
-        <div>{STRINGS.LOADING}</div>
+        <ProgressBar />
       ) : (
-        post && (
+        picked && (
           <Preview className="rp-ecs-cover-article__preview">
-            {featuredMediaUrl && (
+            {picked.featuredMediaUrl && (
               <div className="rp-ecs-cover-article__image-wrapper">
                 <img
-                  src={featuredMediaUrl}
-                  alt={post.title?.rendered || ''}
+                  src={picked.featuredMediaUrl}
+                  alt={picked.title || ''}
                   className="rp-ecs-cover-article__image"
                 />
               </div>
             )}
             <div className="rp-ecs-cover-article__text">
-              <a href={post.link} target="_blank" rel="noreferrer" className="rp-ecs-cover-article__link">
+              <a href={picked.url} target="_blank" rel="noreferrer" className="rp-ecs-cover-article__link">
                 <h2 className="rp-ecs-cover-article__title">
-                  {post.title?.rendered || '(No title)'}
+                  {picked.title || ''}
                 </h2>
               </a>
               <div className="rp-ecs-cover-article__meta">
-                {post.date && <span>{new Date(post.date).toLocaleDateString()}</span>}
-                {authorName && <span> — {authorName}</span>}
+                {picked.date && <span>{new Date(picked.date).toLocaleDateString()}</span>}
+                {picked.author && <span> — {picked.author}</span>}
               </div>
             </div>
           </Preview>

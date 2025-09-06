@@ -18,19 +18,18 @@ export interface CoverSettings {
 /**
  * Cover settings articles
  */
-export interface CoverArticleItem {
+export interface ArticleItem {
   id: number;
   title: string;
   url: string;
   type: string;
   subtype: string;
-  [key: string]: any; // for extra WP post fields
 }
 
 export interface CoverArticlesSettings {
-  article_primary: CoverArticleItem[];
-  article_secondary: CoverArticleItem[];
-  article_tertiary: CoverArticleItem[];
+  article_primary: ArticleItem[];
+  article_secondary: ArticleItem[];
+  article_tertiary: ArticleItem[];
 }
 
 

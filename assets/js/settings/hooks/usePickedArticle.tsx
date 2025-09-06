@@ -1,26 +1,44 @@
 // assets/js/settings/hooks/usePickedArticle.tsx
 import { useEntityRecords } from '@wordpress/core-data';
 
-import { CoverArticleItem, WPPost } from '../types';
+import { ArticleItem, WPPost } from '../types';
 
-export const usePickedArticle = (selectedItem?: CoverArticleItem) => {
+interface PickedArticle extends ArticleItem {
+  date: string;
+  author: string;
+  featuredMediaUrl: string;
+}
+
+interface usePickedArticleReturn {
+  picked: PickedArticle | undefined;
+  isLoading: boolean;
+}
+
+export const usePickedArticle = (selectedItem?: ArticleItem): usePickedArticleReturn => {
   const postId = selectedItem?.id;
-  // console.log(selectedItem);
 
-  // Use type from WPPost
   const postsResolution = useEntityRecords<WPPost>('postType', 'post', {
     include: postId ? [postId] : [],
     _embed: true,
     per_page: 1,
   });
 
-  const post = postsResolution?.records?.find((p) => p.id === postId);
+  const { records, isResolving, hasResolved } = postsResolution;
+  const post = records?.find((p) => p.id === postId);
 
+  const pickedArticle: PickedArticle = {
+    id: post?.id ?? 0,
+    title: post?.title?.rendered ?? '',
+    url: post?.link ?? '',
+    type: selectedItem?.type ?? '',
+    subtype: selectedItem?.subtype ?? '',
+    date: post?.date ?? '',
+    author: post?._embedded?.author?.[0]?.name ?? '',
+    featuredMediaUrl: post?._embedded?.['wp:featuredmedia']?.[0]?.source_url ?? '',
+  };
 
-  const featuredMediaUrl = post?._embedded?.['wp:featuredmedia']?.[0]?.source_url ?? '';
-  const authorName = post?._embedded?.author?.[0]?.name ?? '';
+  const isLoading = isResolving || !hasResolved;  
+  const picked = !isLoading ? pickedArticle : undefined;
 
-  const isLoading = postsResolution === undefined;
-
-  return { post, featuredMediaUrl, authorName, isLoading };
+  return { picked, isLoading };
 };
