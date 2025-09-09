@@ -1,4 +1,3 @@
-// assets/js/settings/components/ui/TextField.tsx
 import { TextControl } from '@wordpress/components';
 
 import { BaseField } from './BaseField';
@@ -7,12 +6,13 @@ interface TextFieldProps {
   label: string;
   value: string;
   onChange: (val: string) => void;
-  validate?: (val: string) => string | null;
+  help?: string; // added
+  validationPath?: string;
   className?: string;
-};
+}
 
-export const TextField = (props: TextFieldProps) => (
-  <BaseField<string> {...props} className={`field-text ${props.className || ''}`}>
+export const TextField = ({ help, ...props }: TextFieldProps) => (
+  <BaseField<string> {...props} help={help} className={`field-text ${props.className || ''}`}>
     {({ value, onChange, help }) => (
       <TextControl value={value} onChange={onChange} help={help} />
     )}

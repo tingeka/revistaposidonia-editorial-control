@@ -22,10 +22,11 @@
 	padding: 0.5rem 1rem;
 	position: fixed;
 	right: 1rem;
-	width: min-content;
+	width: max-content;
 }
 
-.rp-ecs-unsaved {
+.rp-ecs-unsaved,
+.rp-ecs-error {
 	color: variables.$color-error;
 	font-size: 0.875rem;
 	white-space: nowrap;

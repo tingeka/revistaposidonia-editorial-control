@@ -21,9 +21,15 @@
 	width: 100%;
 }
 
-.rp-ecs-cover-article__label {
+.rp-ecs-cover-article__picker {
+	display: flex;
+	flex-direction: column;
+}
+
+.rp-ecs-cover-article__picker-label {
 	align-items: center;
 	display: flex;
+	height: calc(variables.$spacing-md * 2);
 	justify-content: space-between;
 	margin-bottom: 0.25em;
 }

@@ -4,6 +4,6 @@ interface PreviewProps {
   children: React.ReactNode;
 };
 
-export const Preview = ({ className = '', children }: PreviewProps) => (
-  <div className={`rp-ecs-preview ${className}`}>{children}</div>
+export const Preview = ({ className = '', children, ...props }: PreviewProps) => (
+  <div className={`rp-ecs-preview ${className}`} {...props}>{children}</div>
 );

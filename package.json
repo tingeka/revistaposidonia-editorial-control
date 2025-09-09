@@ -15,15 +15,26 @@
     "node": ">=18.0.0"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^6.8.0",
+    "@testing-library/react": "^16.3.0",
+    "@types/jest": "^30.0.0",
+    "@types/react": "^19.1.12",
+    "@types/react-dom": "^19.1.9",
+    "@types/testing-library__jest-dom": "^5.14.9",
     "10up-toolkit": "^6.5.0",
-    "jest-environment-jsdom": "^29.7.0"
+    "jest-environment-jsdom": "^29.7.0",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "ts-jest": "^29.4.1"
   },
   "dependencies": {
     "@10up/block-components": "^1.21.4",
     "@wordpress/components": "^30.2.0",
     "@wordpress/core-data": "^7.29.0",
     "@wordpress/icons": "^10.29.0",
-    "react-tabs": "^6.1.0"
+    "react-tabs": "^6.1.0",
+    "zod": "^4.1.5",
+    "zustand": "^5.0.8"
   },
   "10up-toolkit": {
     "useBlockAssets": true,

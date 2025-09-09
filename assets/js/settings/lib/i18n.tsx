@@ -34,4 +34,5 @@ export const STRINGS = {
     
     // Misc
     NO_TITLE: __('(Sin título)', 'revistaposidonia-editorial-control'),
+    REMOVE: __('Eliminar', 'revistaposidonia-editorial-control'),
 };

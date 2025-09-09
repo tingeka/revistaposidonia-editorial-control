@@ -1,6 +1,6 @@
 // assets/js/settings/types/props.ts
 import {
-    CoverArticleItem, CoverArticlesSettings, CoverAudiovisualSettings, CoverSettings
+    ArticleItem, CoverArticlesSettings, CoverAudiovisualSettings, CoverSettings
 } from './domain';
 
 // Component props
@@ -10,12 +10,12 @@ export interface CoverSettingsProps {
 }
 
 export type CoverUpdaters = {
-  updateArticle: (type: keyof CoverArticlesSettings, items: CoverArticleItem[]) => void;
+  updateArticle: (type: keyof CoverArticlesSettings, items: ArticleItem[]) => void;
   updateAudiovisual: (field: keyof CoverAudiovisualSettings, value: string) => void;
 };
 
 export interface CoverArticleProps {
   label: string;
-  selectedItems: CoverArticleItem[];
-  onSelectItem: (items: CoverArticleItem[]) => void;
+  selectedItems: ArticleItem[];
+  onSelectItem: (items: ArticleItem[]) => void;
 }

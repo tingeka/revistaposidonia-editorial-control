@@ -1,46 +1,10 @@
 // assets/js/settings/types/domain.ts
-/**
- * Settings domain
- */
-export interface Settings {
-	cover: CoverSettings;
-	[key: string]: any;
-}
+import z from 'zod';
 
-/**
- * Cover settings
- */
-export interface CoverSettings {
-	articles: CoverArticlesSettings;
-	audiovisual: CoverAudiovisualSettings;
-}
-
-/**
- * Cover settings articles
- */
-export interface ArticleItem {
-  id: number;
-  title: string;
-  url: string;
-  type: string;
-  subtype: string;
-}
-
-export interface CoverArticlesSettings {
-  article_primary: ArticleItem[];
-  article_secondary: ArticleItem[];
-  article_tertiary: ArticleItem[];
-}
-
-
-/**
- * Cover settings audiovisual
- */
-export interface CoverAudiovisualSettings {
-  title: string;
-  url: string;
-  desc: string;
-}
+import {
+    articleItemSchema, coverArticlesSchema, coverAudiovisualSchema, coverSettingsSchema,
+    settingsSchema
+} from '../lib/schemas';
 
 /**
  * Article section configuration for constants
@@ -58,3 +22,10 @@ export type CoverAudiovisualFieldConfig = {
   label: string;
   type: 'text' | 'url' | 'textarea';
 }
+
+// Type inference from schemas
+export type Settings = z.infer<typeof settingsSchema>;
+export type CoverSettings = z.infer<typeof coverSettingsSchema>;
+export type CoverArticlesSettings = z.infer<typeof coverArticlesSchema>;
+export type CoverAudiovisualSettings = z.infer<typeof coverAudiovisualSchema>;
+export type ArticleItem = z.infer<typeof articleItemSchema>;
