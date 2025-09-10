@@ -3,15 +3,17 @@ import type { StateCreator } from 'zustand';
 import {
     coverArticlesSchema, coverAudiovisualSchema, ValidationError, zodErrorsToValidationErrors
 } from '../../lib/schemas';
+import { CoverArticlesSettings, CoverAudiovisualSettings } from '../../types';
 
-import type { Settings } from '../../lib/schemas';
 import type { SettingsStore } from '../settings';
-
 export interface CoverSlice {
-  updateAudiovisualField: (field: keyof Settings['cover']['audiovisual'], value: string) => void;
-  updateArticles: (
-    type: keyof Settings['cover']['articles'],
-    items: Settings['cover']['articles'][keyof Settings['cover']['articles']]
+  updateAudiovisualField: <K extends keyof CoverAudiovisualSettings>(
+    field: K,
+    value: CoverAudiovisualSettings[K]
+  ) => void;
+  updateArticles: <K extends keyof CoverArticlesSettings>(
+    type: K,
+    items: CoverArticlesSettings[K]
   ) => void;
   validateField: (field: string, value: any) => ValidationError | null;
 }

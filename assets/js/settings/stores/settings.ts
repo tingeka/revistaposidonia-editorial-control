@@ -7,7 +7,6 @@ import apiFetch from '@wordpress/api-fetch';
 import {
     Settings, settingsSchema, ValidationError, zodErrorsToValidationErrors
 } from '../lib/schemas';
-import { combineSlices } from './lib/builder';
 import { CoverSlice, createCoverSlice } from './slices/cover';
 
 export type SettingsStore = {
