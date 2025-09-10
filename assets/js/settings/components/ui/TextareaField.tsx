@@ -14,7 +14,7 @@ interface TextareaFieldProps {
 export const TextareaField = ({ help, ...props }: TextareaFieldProps) => (
   <BaseField<string> {...props} help={help} className={`field-textarea ${props.className || ''}`}>
     {({ value, onChange, help }) => (
-      <TextareaControl value={value} onChange={onChange} help={help} />
+      <TextareaControl value={value} onChange={onChange} help={help} __nextHasNoMarginBottom />
     )}
   </BaseField>
 );

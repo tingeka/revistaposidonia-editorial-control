@@ -16,7 +16,6 @@ export const usePostWithEmbeds = (postId: number) => {
   );
   
   const post = records?.find((p) => p.id === postId);
-  console.log(post); // Debugging line to inspect the post object
   const isLoading = isResolving || !hasResolved;
   
   return { post, isLoading };

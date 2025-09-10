@@ -14,7 +14,7 @@ interface UrlFieldProps {
 export const UrlField = ({ help, ...props }: UrlFieldProps) => (
   <BaseField<string> {...props} help={help} className={`field-url ${props.className || ''}`}>
     {({ value, onChange, help }) => (
-      <TextControl value={value} onChange={onChange} help={help} type="url" />
+      <TextControl value={value} onChange={onChange} help={help} type="url" __nextHasNoMarginBottom __next40pxDefaultSize/>
     )}
   </BaseField>
 );

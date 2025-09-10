@@ -14,7 +14,7 @@ interface TextFieldProps {
 export const TextField = ({ help, ...props }: TextFieldProps) => (
   <BaseField<string> {...props} help={help} className={`field-text ${props.className || ''}`}>
     {({ value, onChange, help }) => (
-      <TextControl value={value} onChange={onChange} help={help} />
+      <TextControl value={value} onChange={onChange} help={help} __nextHasNoMarginBottom __next40pxDefaultSize/>
     )}
   </BaseField>
 );

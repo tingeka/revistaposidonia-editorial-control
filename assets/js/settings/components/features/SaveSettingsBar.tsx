@@ -15,8 +15,6 @@ export const SaveSettingsBar = ({ hasUnsavedChanges, saving, saveSettings }: Sav
   const [showSavedSnackbar, setShowSavedSnackbar] = useState(false);
   const validationErrors = useSettingsStore(state => state.validationErrors);
 
-	console.log(validationErrors);
-
   const handleSave = async () => {
     const success = await saveSettings();
     if (success) {
