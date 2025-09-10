@@ -12,6 +12,7 @@ module.exports = {
 		"^react-tabs$": "<rootDir>/__tests__/mocks/reactTabsMock.tsx",
 		"^@10up/block-components$":
 			"<rootDir>/__tests__/mocks/tenupBlockComponentsMock.tsx",
+		"\\.(css|scss)$": "<rootDir>/__tests__/mocks/styleMock.tsx",
 	},
 	transform: {
 		"^.+\\.tsx?$": [

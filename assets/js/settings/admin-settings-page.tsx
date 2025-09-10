@@ -13,7 +13,7 @@ import { STRINGS } from './lib/i18n';
 import { useSettingsStore } from './stores/settings';
 
 // Main React app
-const EditorialControlApp = () => {
+export const EditorialControlApp = () => {
   // Zustand selectors
   const loading = useSettingsStore((state) => state.loading);
   const saving = useSettingsStore((state) => state.saving);
@@ -36,7 +36,7 @@ const EditorialControlApp = () => {
   }
 
   return (
-    <div className="rp-ecs-container">
+    <div className="rp-ecs-container" data-testid="editorial-control-app">
       <Tabs>
         <TabList>
           <Tab>{STRINGS.COVER}</Tab>

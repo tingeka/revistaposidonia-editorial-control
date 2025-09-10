@@ -34,9 +34,9 @@ const PickedArticlePreview = ({ selectedItem, label }: { selectedItem?: ArticleI
   };
 
   return (
-    <Preview className="rp-ecs-cover-article__preview" aria-label={`${label} preview`}>
+    <Preview className="rp-ecs-cover-article__preview" data-testid={`picked-article-${picked.id}`}>
       {picked.featuredMediaUrl && (
-        <div className="rp-ecs-cover-article__image-wrapper" aria-label={`${label} preview image`}>
+        <div className="rp-ecs-cover-article__image-wrapper" data-testid={`picked-article-${picked.id}-image`}>
           <img
             src={picked.featuredMediaUrl}
             alt={picked.title || ''}
@@ -46,16 +46,16 @@ const PickedArticlePreview = ({ selectedItem, label }: { selectedItem?: ArticleI
       )}
       <div className="rp-ecs-cover-article__text">
         {picked.url && (
-          <a href={picked.url} target="_blank" rel="noreferrer" className="rp-ecs-cover-article__link" aria-label={`${label} preview link`}>
+          <a href={picked.url} target="_blank" rel="noreferrer" className="rp-ecs-cover-article__link" data-testid={`picked-article-${picked.id}-link`} >
             <h2 className="rp-ecs-cover-article__title">{picked.title || ''}</h2>
           </a>
         )}
         {/* Only render meta if at least one field exists */}
         {(picked.date || picked.author) && (
-          <div className="rp-ecs-cover-article__meta" aria-label={`${label} preview meta`}>
-            {picked.date && <span aria-label={`${label} preview date`}>{new Date(picked.date).toLocaleDateString()}</span>}
+          <div className="rp-ecs-cover-article__meta" data-testid={`picked-article-${picked.id}-meta`}>
+            {picked.date && <span data-testid={`picked-article-${picked.id}-date`}>{new Date(picked.date).toLocaleDateString()}</span>}
             {picked.date && picked.author && <span> — </span>}
-            {picked.author && <span aria-label={`${label} preview author`}>{picked.author}</span>}
+            {picked.author && <span data-testid={`picked-article-${picked.id}-author`}>{picked.author}</span>}
           </div>
         )}
       </div>

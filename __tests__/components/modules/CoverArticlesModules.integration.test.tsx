@@ -1,5 +1,4 @@
 import { act, fireEvent, render, screen, within } from '@testing-library/react';
-import { audio } from '@wordpress/icons';
 
 import {
     CoverArticlesModule
@@ -11,7 +10,7 @@ import {
     ArticleItem, CoverArticleConfig, CoverArticlesSettings
 } from '../../../assets/js/settings/types';
 
-jest.mock('../../assets/js/settings/hooks/usePostWithEmbeds');
+jest.mock('../../../assets/js/settings/hooks/usePostWithEmbeds');
 
 describe('CoverArticlesModule + ArticlePicker', () => {
 	const mockUsePostWithEmbeds = hooks.usePostWithEmbeds as jest.Mock;
@@ -75,29 +74,31 @@ describe('CoverArticlesModule + ArticlePicker', () => {
 			render(<CoverArticlesModule />);
 
 			// 4. Find preview
-			const preview = await screen.findByLabelText(`${articleLabel} preview`);
+			const preview = await screen.findByTestId(`picked-article-${article.id}`);
 			expect(preview).toBeInTheDocument();
 
 			// 5. Check title link
-			const link = within(preview).getByLabelText(`${articleLabel} preview link`);
+			const link = within(preview).getByTestId(`picked-article-${article.id}-link`);
 			expect(link).toBeInTheDocument();
 			expect(link).toHaveTextContent('Test Article');
 
 			// 6. Check meta
-			const meta = within(preview).getByLabelText(`${articleLabel} preview meta`);
+			const meta = within(preview).getByTestId(`picked-article-${article.id}-meta`);
 			expect(meta).toBeInTheDocument();
 
 			// 7. Check date inside meta
-			const dateEl = within(meta).getByLabelText(`${articleLabel} preview date`);
+			const dateEl = within(meta).getByTestId(`picked-article-${article.id}-date`);
 			expect(dateEl).toBeInTheDocument();
 			expect(dateEl.textContent).toBeTruthy();
 			expect(!isNaN(Date.parse(dateEl.textContent!))).toBe(true);
 
 			// 8. Check author
-			expect(meta).toHaveTextContent('Jane Doe');
-			screen.debug();
+			const authorEl = within(meta).getByTestId(`picked-article-${article.id}-author`);
+			expect(authorEl).toBeInTheDocument();
+			expect(authorEl).toHaveTextContent('Jane Doe');
+
 			// 9. Check image
-			const imageContainer = within(preview).getByLabelText(`${articleLabel} preview image`) as HTMLImageElement;
+			const imageContainer = within(preview).getByTestId(`picked-article-${article.id}-image`);
 			expect(imageContainer).toBeInTheDocument();
 			expect(within(imageContainer).getByRole('img')).toHaveAttribute('src', 'https://example.com/image.jpg');
 		});
@@ -128,9 +129,6 @@ describe('CoverArticlesModule + ArticlePicker', () => {
 
 			const primaryConfig = ARTICLE_TYPES.find(t => t.key === 'article_primary')!;
 			const secondaryConfig = ARTICLE_TYPES.find(t => t.key === 'article_secondary')!;
-
-			const primaryLabel = primaryConfig.label;
-			const secondaryLabel = secondaryConfig.label;
 
 			// 2. Mock hook to return full _embedded for both (before populating store)
 			mockUsePostWithEmbeds.mockImplementation((postId: number) => {
@@ -190,18 +188,18 @@ describe('CoverArticlesModule + ArticlePicker', () => {
 			render(<CoverArticlesModule />);
 
 			// 5. Assert each preview renders independently
-			const primaryPreview = await screen.findByLabelText(`${primaryLabel} preview`);
-			const secondaryPreview = await screen.findByLabelText(`${secondaryLabel} preview`);
+			const primaryPreview = await screen.getByTestId(`picked-article-${articles.article_primary[0].id}`);
+			const secondaryPreview = await screen.getByTestId(`picked-article-${articles.article_secondary[0].id}`);
 
 			expect(primaryPreview).toBeInTheDocument();
 			expect(secondaryPreview).toBeInTheDocument();
 
 			// 6. Check that titles and authors are correct
-			expect(within(primaryPreview).getByLabelText(`${primaryLabel} preview link`)).toHaveTextContent('Primary Article');
-			expect(within(primaryPreview).getByLabelText(`${primaryLabel} preview meta`)).toHaveTextContent('Alice');
+			expect(within(primaryPreview).getByTestId(`picked-article-${articles.article_primary[0].id}-link`)).toHaveTextContent('Primary Article');
+			expect(within(primaryPreview).getByTestId(`picked-article-${articles.article_primary[0].id}-meta`)).toHaveTextContent('Alice');
 
-			expect(within(secondaryPreview).getByLabelText(`${secondaryLabel} preview link`)).toHaveTextContent('Secondary Article');
-			expect(within(secondaryPreview).getByLabelText(`${secondaryLabel} preview meta`)).toHaveTextContent('Bob');
+			expect(within(secondaryPreview).getByTestId(`picked-article-${articles.article_secondary[0].id}-link`)).toHaveTextContent('Secondary Article');
+			expect(within(secondaryPreview).getByTestId(`picked-article-${articles.article_secondary[0].id}-meta`)).toHaveTextContent('Bob');
 
 			// 7. Simulate updating one article and ensure the other doesn't change
 			const newPrimary: ArticleItem = {
@@ -217,14 +215,14 @@ describe('CoverArticlesModule + ArticlePicker', () => {
 			});
 
 			// 8. Wait for the updated primary preview to appear
-			const updatedPrimaryPreview = await screen.findByLabelText(`${primaryLabel} preview`);
-			expect(within(updatedPrimaryPreview).getByLabelText(`${primaryLabel} preview link`)).toHaveTextContent('Updated Primary');
-			expect(within(updatedPrimaryPreview).getByLabelText(`${primaryLabel} preview meta`)).toHaveTextContent('Charlie');
+			const updatedPrimaryPreview = await screen.findByTestId(`picked-article-${newPrimary.id}`);
+			expect(within(updatedPrimaryPreview).getByTestId(`picked-article-${newPrimary.id}-link`)).toHaveTextContent('Updated Primary');
+			expect(within(updatedPrimaryPreview).getByTestId(`picked-article-${newPrimary.id}-meta`)).toHaveTextContent('Charlie');
 
 			// 9. Secondary preview should remain unchanged
-			const secondaryPreviewAfter = screen.getByLabelText(`${secondaryLabel} preview`);
-			expect(within(secondaryPreviewAfter).getByLabelText(`${secondaryLabel} preview link`)).toHaveTextContent('Secondary Article');
-			expect(within(secondaryPreviewAfter).getByLabelText(`${secondaryLabel} preview meta`)).toHaveTextContent('Bob');
+			const secondaryPreviewAfter = screen.getByTestId(`picked-article-${articles.article_secondary[0].id}`);
+			expect(within(secondaryPreviewAfter).getByTestId(`picked-article-${articles.article_secondary[0].id}-link`)).toHaveTextContent('Secondary Article');
+			expect(within(secondaryPreviewAfter).getByTestId(`picked-article-${articles.article_secondary[0].id}-meta`)).toHaveTextContent('Bob');
 		});
 
 	});
@@ -272,7 +270,7 @@ describe('CoverArticlesModule + ArticlePicker', () => {
 			expect(state.loading).toBe(true);
 
 			// 7. Check that UI updates correctly (no crash, preview gone)
-			const preview = await screen.queryByLabelText(`${primaryLabel} preview`);
+			const preview = await screen.queryByTestId(`picked-article-${article.id}`);
 			expect(preview).toBeNull();
 		});
 
@@ -304,15 +302,15 @@ describe('CoverArticlesModule + ArticlePicker', () => {
 			render(<CoverArticlesModule />);
 
 			// 4. Get the dynamic label for primary article type
-			const preview = await screen.findByLabelText(`${articleLabel} preview`);
+			const preview = await screen.findByTestId(`picked-article-${article.id}`);
 
 			// 5. Assert that the basic preview renders
 			expect(preview).toBeInTheDocument();
 
 			// 6. Assert title link exists, but no meta or image
-			expect(within(preview).getByLabelText(`${articleLabel} preview link`)).toBeInTheDocument();
-			expect(within(preview).queryByLabelText(`${articleLabel} preview meta`)).toBeNull();
-			expect(within(preview).queryByLabelText(`${articleLabel} preview image`)).toBeNull();
+			expect(within(preview).getByTestId(`picked-article-${article.id}-link`)).toBeInTheDocument();
+			expect(within(preview).queryByTestId(`picked-article-${article.id}-meta`)).toBeNull();
+			expect(within(preview).queryByTestId(`picked-article-${article.id}-image`)).toBeNull();
 		});
 
 		it('handles null or empty API response gracefully', async () => {
@@ -343,7 +341,7 @@ describe('CoverArticlesModule + ArticlePicker', () => {
 			render(<CoverArticlesModule />);
 
 			// 4. Preview should render safely (null post => no crash)
-			const preview = await screen.queryByLabelText(`${articleLabel} preview`);
+			const preview = await screen.queryByTestId(`picked-article-${article.id}`);
 			expect(preview).toBeNull();
 
 			// 5. Ensure store is unchanged

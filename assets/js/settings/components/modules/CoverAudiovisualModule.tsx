@@ -47,7 +47,7 @@ export const CoverAudiovisualModule = () => {
       </div>
 
       {hasAudiovisualContent(audiovisual) && (
-        <Preview className="rp-ecs-cover-audiovisual-section__preview">
+        <Preview className="rp-ecs-cover-audiovisual-section__preview" data-testid="audiovisual-preview">
           <VideoEmbed
             url={audiovisual.url}
             className="rp-ecs-cover-audiovisual-section__preview-embed"

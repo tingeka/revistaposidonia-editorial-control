@@ -31,20 +31,21 @@
 ### App
 
 **`EditorialControlApp`**
-- [ ] Renders loading spinner initially, then tabs after `loadSettings` completes
-- [ ] Editing a field sets `hasUnsavedChanges=true`
-- [ ] Clicking save calls API, resets unsaved changes, shows success snackbar
-- [ ] Validation errors prevent save and show error messages
+- [x] Renders loading spinner initially, then tabs after `loadSettings` completes
+- [x] Editing a field sets `hasUnsavedChanges=true`
+- [x] Clicking save calls API, resets unsaved changes, shows success snackbar
+- [x] Successful save resets unsaved changes
+- [x] Disables save button when validation errors exist
 
 ### Modules
 
 **`CoverAudiovisualModule`**
-- [ ] YouTube URL with additional query params still shows correct video embed preview
-- [ ] Vimeo URL with extra path segments shows correct video embed preview
-- [ ] URL with uppercase hostname shows video embed preview
-- [ ] URL with trailing slash shows video embed preview
-- [ ] Empty title or description still shows video embed preview
-- [ ] Whitespace-only URL hides preview section
+- [x] Shows correct video embed preview when a YouTube URL has additional query params 
+- [x] Shows correct video embed preview when Vimeo URL has extra path segments 
+- [x] Shows video embed preview when the URL has an uppercase hostname
+- [x] Shows video embed preview when the URL has a trailing slash
+- [x] Shows video embed preview with an empty title/description
+- [x] Hides preview section for whitespace-only URL
 
 **`CoverArticlesModule` + `ArticlePicker`**
 - [x] Does not break store state when removing an article while another is loading 
