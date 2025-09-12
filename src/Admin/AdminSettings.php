@@ -9,11 +9,11 @@ declare(strict_types = 1);
 
 namespace RevistaPosidonia\EditorialControl\Admin;
 
-use TenupFramework\ModuleInterface;
-use TenupFramework\Module;
+use RevistaPosidonia\EditorialControl\Vendor\TenupFramework\ModuleInterface;
+use RevistaPosidonia\EditorialControl\Vendor\TenupFramework\Module;
+use RevistaPosidonia\EditorialControl\Vendor\Monolog\Logger;
 
 use RevistaPosidonia\EditorialControl\Inc\LoggerFactory;
-use Monolog\Logger;
 
 use WP_REST_Request;
 

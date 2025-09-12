@@ -7,7 +7,7 @@
 
 namespace RevistaPosidonia\EditorialControl;
 
-use TenupFramework\ModuleInitialization;
+use RevistaPosidonia\EditorialControl\Vendor\TenupFramework\ModuleInitialization;
 
 /**
  * PluginCore module.
@@ -46,7 +46,7 @@ class PluginCore {
 	public function init() {
 		do_action( 'revistaposidonia_editorial_control_before_init' );
 
-		if ( ! class_exists( '\TenupFramework\ModuleInitialization' ) ) {
+		if ( ! class_exists( 'RevistaPosidonia\EditorialControl\Vendor\TenupFramework\ModuleInitialization' ) ) {
 			add_action(
 				'admin_notices',
 				function () {

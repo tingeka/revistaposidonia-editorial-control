@@ -1,5 +1,6 @@
 node_modules
 vendor
+vendor-scoped
 dist
 *.txt
 .tsbuildinfo

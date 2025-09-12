@@ -10,11 +10,11 @@
 
 namespace RevistaPosidonia\EditorialControl\Inc;
 
-use Monolog\Logger;
-use Monolog\Handler\StreamHandler;
-use Monolog\Handler\ErrorLogHandler;
-use Monolog\Processor\ProcessorInterface;
-use Monolog\Formatter\LineFormatter;
+use RevistaPosidonia\EditorialControl\Vendor\Monolog\Logger;
+use RevistaPosidonia\EditorialControl\Vendor\Monolog\Handler\StreamHandler;
+use RevistaPosidonia\EditorialControl\Vendor\Monolog\Handler\ErrorLogHandler;
+use RevistaPosidonia\EditorialControl\Vendor\Monolog\Processor\ProcessorInterface;
+use RevistaPosidonia\EditorialControl\Vendor\Monolog\Formatter\LineFormatter;
 
 /**
  * LoggerFactory is responsible for creating and managing Monolog logger instances

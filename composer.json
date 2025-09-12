@@ -1,14 +1,17 @@
 {
   "name": "revistaposidonia/editorial-control",
-  "description": "The starting point for all 10up WordPress plugins.",
+  "description": "Plugin for editorial control in Revista Posidonia",
   "license": "MIT",
   "type": "wordpress-plugin",
+  "homepage": "https://github.com/tingeka/revistaposidonia-editorial-control",
   "authors": [
     {
-      "name": "10up",
-      "email": "info@10up.com"
+      "name": "Martín García"
     }
   ],
+  "scripts":{
+    "scope": "bash bin/scope.sh"
+  },
   "require": {
     "php": ">=8.2",
     "10up/wp-framework": "~1.2.0",
@@ -18,5 +21,9 @@
     "psr-4": {
       "RevistaPosidonia\\EditorialControl\\": "src/"
     }
+  },
+  "require-dev": {
+    "humbug/php-scoper": "^0.18.17",
+    "sniccowp/php-scoper-wordpress-excludes": "^6.8"
   }
 }

@@ -43,7 +43,14 @@ if ( ! file_exists( REVISTAPOSIDONIA_EDITORIAL_CONTROL_PATH . 'vendor/autoload.p
 	);
 }
 
-require_once REVISTAPOSIDONIA_EDITORIAL_CONTROL_PATH . 'vendor/autoload.php';
+// Bail if vendor deps are not scoped.
+if ( ! file_exists( REVISTAPOSIDONIA_EDITORIAL_CONTROL_PATH . 'vendor-scoped/scoper-autoload.php' ) ) {
+	throw new \Exception(
+		'Vendor deps not scoped. Please run `composer scope`.'
+	);
+}
+
+require_once REVISTAPOSIDONIA_EDITORIAL_CONTROL_PATH . 'vendor-scoped/scoper-autoload.php';
 
 $plugin_core = new \RevistaPosidonia\EditorialControl\PluginCore();
 

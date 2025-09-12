@@ -7,9 +7,9 @@
 
 namespace RevistaPosidonia\EditorialControl\Admin;
 
-use TenupFramework\Assets\GetAssetInfo;
-use TenupFramework\Module;
-use TenupFramework\ModuleInterface;
+use RevistaPosidonia\EditorialControl\Vendor\TenupFramework\Assets\GetAssetInfo;
+use RevistaPosidonia\EditorialControl\Vendor\TenupFramework\Module;
+use RevistaPosidonia\EditorialControl\Vendor\TenupFramework\ModuleInterface;
 
 /**
  * AdminPage module.

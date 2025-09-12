@@ -5,7 +5,7 @@
 
 // namespace RevistaPosidonia\EditorialControl\Inc;
 
-use TenupFramework\ModuleInitialization;
+use RevistaPosidonia\EditorialControl\Vendor\TenupFramework\ModuleInitialization;
 use RevistaPosidonia\EditorialControl\Admin\AdminSettings;
 
 /**
