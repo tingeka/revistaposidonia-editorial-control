@@ -4,3 +4,4 @@ vendor-scoped
 dist
 *.txt
 .tsbuildinfo
+class-loader-cache

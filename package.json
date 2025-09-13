@@ -39,8 +39,6 @@
     "zustand": "^5.0.8"
   },
   "10up-toolkit": {
-    "useBlockAssets": true,
-    "useScriptModules": true,
-    "loadBlockSpecificStyles": true
+    "useScriptModules": true
   }
 }

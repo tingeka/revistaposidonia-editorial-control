@@ -1,48 +1,112 @@
-#!/usr/bin/env node
-
-const { spawn } = require('child_process');
+/**
+ * External dependencies
+ */
+const webpack = require('webpack');
+const WebpackDevServer = require('webpack-dev-server');
 const fs = require('fs');
 const path = require('path');
+const { spawn } = require('child_process');
 
+/**
+ * Internal dependencies
+ */
+const {
+	hasArgInCLI,
+	fromConfigRoot,
+	fromProjectRoot,
+	displayWebpackStats,
+} = require('10up-toolkit/utils');
+
+// --- TypeScript watch ---
 const projectRoot = path.resolve(__dirname, '..');
 const tsconfigWatch = path.join(projectRoot, 'tsconfig.watch.json');
-
-// Helper to spawn a process and merge its output
-function runCommandMerged(command, args, name) {
-	const proc = spawn(command, args, { shell: true });
-
-	proc.stdout.on('data', (data) => {
-		process.stdout.write(`[${name}] ${data}`);
-	});
-
-	proc.stderr.on('data', (data) => {
-		process.stderr.write(`[${name} ERROR] ${data}`);
-	});
-
-	proc.on('exit', (code) => {
-		if (code !== 0) process.exit(code);
-	});
-
-	return proc;
-}
-
-// Start 10up-toolkit watch
-console.log('Starting 10up-toolkit watch...');
-const toolkitProcess = runCommandMerged('10up-toolkit', ['watch', '--port=5010', '--hot'], 'Webpack');
-
-// Start tsc watch if tsconfig.watch.json exists
 let tscProcess = null;
-if (fs.existsSync(tsconfigWatch)) {
-	console.log('Found tsconfig.watch.json, starting TypeScript watch...');
-	tscProcess = runCommandMerged('tsc', ['--watch', '--project', tsconfigWatch, '--pretty', '--preserveWatchOutput'], 'TS');
-} else {
-	console.log('No tsconfig.watch.json found, skipping TypeScript watch.');
+
+function startTscWatch() {
+	if (fs.existsSync(tsconfigWatch)) {
+		console.log('Found tsconfig.watch.json, starting TypeScript watch...');
+		tscProcess = spawn(
+			'tsc',
+			['--watch', '--project', tsconfigWatch, '--pretty', '--preserveWatchOutput'],
+			{ shell: true }
+		);
+
+		tscProcess.stdout.on('data', (data) => {
+			process.stdout.write(`[TS] ${data}`);
+		});
+
+		tscProcess.stderr.on('data', (data) => {
+			process.stderr.write(`[TS ERROR] ${data}`);
+		});
+	} else {
+		console.log('No tsconfig.watch.json found, skipping TypeScript watch.');
+	}
 }
 
-// Graceful exit on Ctrl+C
+// --- Webpack stuff ---
+if (hasArgInCLI('--webpack-no-externals')) {
+	process.env.TENUP_NO_EXTERNALS = true;
+}
+
+let configs = require(fromProjectRoot('webpack.config.js'));
+configs = Array.isArray(configs) ? configs : [configs];
+
+const mainConfig = configs[0];
+const otherConfigs = configs.slice(1);
+
+let server;
+const compilers = [];
+
+const startMainCompiler = () => {
+	const compiler = webpack(mainConfig);
+	compilers.push(compiler);
+
+	const { devServer } = mainConfig;
+
+	if (devServer) {
+		const devServerOptions = { ...devServer, open: false };
+		server = new WebpackDevServer(devServerOptions, compiler);
+		server.start();
+	} else {
+		compiler.watch({ aggregateTimeout: 600 }, displayWebpackStats);
+	}
+};
+
+const watchOtherConfigs = () => {
+	otherConfigs.forEach((config) => {
+		const compiler = webpack(config);
+		compilers.push(compiler);
+		compiler.watch({ aggregateTimeout: 600 }, displayWebpackStats);
+	});
+};
+
+const hot = hasArgInCLI('--hot');
+
+if (hot) {
+	const frConfig = require(fromConfigRoot('webpack-fast-refresh.config.js'));
+	const frCompiler = webpack(frConfig);
+
+	frCompiler.run((err, stats) => {
+		displayWebpackStats(err, stats);
+		frCompiler.close((closedErr) => {
+			if (closedErr) console.error(closedErr);
+			else {
+				startMainCompiler();
+				watchOtherConfigs();
+			}
+		});
+	});
+} else {
+	startMainCompiler();
+	watchOtherConfigs();
+}
+
+// --- Start tsc watch alongside webpack ---
+startTscWatch();
+
+// --- Clean shutdown ---
 process.on('SIGINT', () => {
-	console.log('\nShutting down...');
-	toolkitProcess.kill();
+	if (server) server.close(() => {});
+	compilers.forEach((c) => c.close());
 	if (tscProcess) tscProcess.kill();
-	process.exit();
 });

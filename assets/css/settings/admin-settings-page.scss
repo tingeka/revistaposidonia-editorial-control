@@ -1,5 +1,5 @@
 @use "abstracts/variables";
-@use "@wordpress/components/build-style/style";
+@use "../../../node_modules/@wordpress/components/build-style/style";
 @use "components/index" as components;
 @use "vendors/index" as vendors;
 

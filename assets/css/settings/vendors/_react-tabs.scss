@@ -1,6 +1,6 @@
 /* react-tabs */
 @use "../abstracts/variables";
-@use "react-tabs/style/react-tabs";
+@use "../../../../node_modules/react-tabs/style/react-tabs";
 
 .react-tabs {
 	display: flex;
