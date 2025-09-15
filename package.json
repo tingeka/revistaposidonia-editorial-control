@@ -4,6 +4,7 @@
   "scripts": {
     "start": "npm run watch",
     "watch": "node bin/watch.js",
+    "watch:hot": "node bin/watch.js --hot",
     "build": "node bin/build.js",
     "format-js": "10up-toolkit format-js",
     "lint-js": "10up-toolkit lint-js",
