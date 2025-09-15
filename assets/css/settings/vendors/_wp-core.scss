@@ -2,6 +2,7 @@
 @use "../abstracts/variables";
 
 /* WP overrides */
+body.toplevel_page_editorial-control-page,
 #wpbody {
 	background-color: variables.$white;
 }
