@@ -40,8 +40,8 @@ if ( $is_local && file_exists( __DIR__ . '/dist/fast-refresh.php' ) ) {
 	}
 }
 
-// Bail if Composer autoloader is not found.
-if ( ! file_exists( REVISTAPOSIDONIA_EDITORIAL_CONTROL_PATH . 'vendor/autoload.php' ) ) {
+// Only check for Composer autoload in local environments.
+if ( $is_local && ! file_exists( REVISTAPOSIDONIA_EDITORIAL_CONTROL_PATH . 'vendor/autoload.php' ) ) {
 	throw new \Exception(
 		'Vendor autoload file not found. Please run `composer install`.'
 	);
