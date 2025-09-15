@@ -1,17 +1,17 @@
 <?php
 /**
  * Plugin Name:       Revista Posidonia - Editorial Control
- * Description:       A brief description of the plugin.
- * Version:           0.1.0
+ * Description:       This plugin provides a dedicated settings page within the WordPress admin dashboard, where users can manage and configure various custom-made features and settings.
+ * Version:           1.0.0
  * Requires at least: 4.9
  * Requires PHP:      8.2
- * Author:            10up
- * Author URI:        https://10up.com
+ * Author:            Martín García
+ * Author URI:        https://github.com/tingeka
  * License:           GPL v2 or later
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
- * Text Domain:       enfantterrible-models
+ * Text Domain:       revistaposidonia-editorial-control
  * Domain Path:       /languages
- * Update URI:        https://github.com/enfantterrible-ar/wp
+ * Update URI:        https://github.com/tingeka/revistaposidonia-editorial-control
  *
  * @package           RevistaPosidoniaEditorialControl
  */
