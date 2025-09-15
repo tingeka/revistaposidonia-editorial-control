@@ -9,7 +9,8 @@
     "lint-js": "10up-toolkit lint-js",
     "lint-style": "10up-toolkit lint-style",
     "test": "10up-toolkit test-unit-jest --passWithNoTests",
-    "clean-dist": "rm -rf ./dist"
+    "clean-dist": "rm -rf ./dist",
+    "zip": "node bin/zip.js"
   },
   "engines": {
     "node": ">=18.0.0"
