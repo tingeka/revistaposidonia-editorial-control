@@ -5,3 +5,4 @@ dist
 *.txt
 .tsbuildinfo
 class-loader-cache
+/release
