@@ -6,7 +6,7 @@ import { AUDIOVISUAL_FIELDS } from './constants';
 
 export const getEmbedUrl = (url: string): string | null => {
   if (!url) return null;
-  const normalizedUrl = url.trim().toLocaleLowerCase();
+  const normalizedUrl = url.trim();
   const { id, service } = getVideoId(normalizedUrl);
   if (!id || !service) return null;
 
