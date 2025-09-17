@@ -1,3 +1,16 @@
+# [1.1.0](https://github.com/tingeka/revistaposidonia-editorial-control/compare/v1.0.0...v1.1.0) (2025-09-17)
+
+
+### Bug Fixes
+
+* normalize URL before parsing and improve test targeting ([69c2477](https://github.com/tingeka/revistaposidonia-editorial-control/commit/69c247733d0b8b229f04b87c25e9e4ee87128666))
+* removed lowercasing ([4ccf3b2](https://github.com/tingeka/revistaposidonia-editorial-control/commit/4ccf3b25152dba13e4018a4e1e61ec8fde8c0efb))
+
+
+### Features
+
+* add custom styling for save success snackbar ([491d43a](https://github.com/tingeka/revistaposidonia-editorial-control/commit/491d43a9a587a26d96bd445bd37263e6e4748d5a))
+
 # 1.0.0 (2025-09-17)
 
 
