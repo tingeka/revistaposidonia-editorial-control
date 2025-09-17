@@ -19,7 +19,7 @@ export const VideoEmbed = ({ url, className = '', style }: VideoEmbedProps) => {
       {embedUrl ? (
         <iframe
           src={embedUrl}
-          role="document"
+          data-testid="video-embed-iframe"
           allowFullScreen
           style={{ width: '100%', height: 'auto', aspectRatio: '16/9', border: 'none' }}
         />

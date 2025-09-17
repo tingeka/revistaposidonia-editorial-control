@@ -6,14 +6,24 @@ import { AUDIOVISUAL_FIELDS } from './constants';
 
 export const getEmbedUrl = (url: string): string | null => {
   if (!url) return null;
-  const normalizedUrl = url.trim();
-  const { id, service } = getVideoId(normalizedUrl);
-  if (!id || !service) return null;
 
-  if (service === 'youtube') return `https://www.youtube.com/embed/${id}`;
-  if (service === 'vimeo') return `https://player.vimeo.com/video/${id}`;
+  try {
+    const parsed = new URL(url.trim());
+    // normalize protocol + hostname
+    parsed.protocol = parsed.protocol.toLowerCase();
+    parsed.hostname = parsed.hostname.toLowerCase();
+    const normalizedUrl = parsed.toString();
 
-  return null;
+    const { id, service } = getVideoId(normalizedUrl);
+    if (!id || !service) return null;
+
+    if (service === 'youtube') return `https://www.youtube.com/embed/${id}`;
+    if (service === 'vimeo') return `https://player.vimeo.com/video/${id}`;
+
+    return null;
+  } catch {
+    return null;
+  }
 };
 
 export const hasAudiovisualContent = (settings: CoverAudiovisualSettings): boolean => 

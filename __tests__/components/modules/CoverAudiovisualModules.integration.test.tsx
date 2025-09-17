@@ -28,7 +28,7 @@ describe('CoverAudiovisualModule', () => {
 
     const preview = await screen.getByTestId('audiovisual-preview');
     expect(preview).toBeInTheDocument();
-    const iframe = within(preview).getByRole('document');
+    const iframe = within(preview).getByTestId('video-embed-iframe');
     expect(iframe).toBeInTheDocument();
     expect(iframe).toHaveAttribute('src', expect.stringContaining('https://www.youtube.com/embed/abc123'));
   });
@@ -42,7 +42,7 @@ describe('CoverAudiovisualModule', () => {
 
     const preview = await screen.getByTestId('audiovisual-preview');
     expect(preview).toBeInTheDocument();
-    const iframe = within(preview).getByRole('document');
+    const iframe = within(preview).getByTestId('video-embed-iframe');
     expect(iframe).toBeInTheDocument();
     expect(iframe).toHaveAttribute('src', expect.stringContaining('https://player.vimeo.com/video/12345678'));
   });
@@ -56,7 +56,7 @@ describe('CoverAudiovisualModule', () => {
 
     const preview = await screen.getByTestId('audiovisual-preview');
     expect(preview).toBeInTheDocument();
-    const iframe = within(preview).getByRole('document');
+    const iframe = within(preview).getByTestId('video-embed-iframe');
     expect(iframe).toBeInTheDocument();
     expect(iframe).toHaveAttribute('src', expect.stringContaining('https://www.youtube.com/embed/xyz789'));
   });
@@ -70,7 +70,7 @@ describe('CoverAudiovisualModule', () => {
 
     const preview = await screen.getByTestId('audiovisual-preview');
     expect(preview).toBeInTheDocument();
-    const iframe = within(preview).getByRole('document');
+    const iframe = within(preview).getByTestId('video-embed-iframe');
     expect(iframe).toBeInTheDocument();
     expect(iframe).toHaveAttribute('src', expect.stringContaining('https://player.vimeo.com/video/987654321'));
   });
@@ -87,7 +87,7 @@ describe('CoverAudiovisualModule', () => {
     const preview = await screen.getByTestId('audiovisual-preview');
     expect(preview).toBeInTheDocument();
 
-    const iframe = within(preview).getByRole('document');
+    const iframe = within(preview).getByTestId('video-embed-iframe');
     expect(iframe).toBeInTheDocument();
 
     // Assert title/desc aren’t required
