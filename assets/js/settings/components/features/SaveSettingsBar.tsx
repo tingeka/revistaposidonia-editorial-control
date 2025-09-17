@@ -28,7 +28,7 @@ export const SaveSettingsBar = ({ hasUnsavedChanges, saving, saveSettings }: Sav
   return (
     <div className="rp-ecs-save-container" data-testid="save-settings-bar">
       {showSavedSnackbar && (
-        <Snackbar onRemove={() => setShowSavedSnackbar(false)}>
+        <Snackbar onRemove={() => setShowSavedSnackbar(false)} className="rp-ecs-snackbar">
           {STRINGS.SETTINGS_SAVED_SUCCESS}
         </Snackbar>
       )}
