@@ -1,60 +1,45 @@
 name: WP Plugin Release
-
 on:
   push:
-    tags:
-      - 'v*'   # Trigger on tags like v1.0.0
+    branches:
+      - main
 
 jobs:
   release:
     runs-on: ubuntu-latest
-
     steps:
-      # 1. Checkout repository
       - name: Checkout code
         uses: actions/checkout@v3
-
-      # 2. Setup PHP
+        with:
+          fetch-depth: 0
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 20
+      
       - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
           php-version: 8.3
           extensions: mbstring, intl, zip
-
-      # 3. Install Composer dependencies
+      
+      - name: Install Node.js dependencies
+        run: npm ci
+      
       - name: Install PHP dependencies
         run: composer install --no-interaction --prefer-dist --optimize-autoloader
-
-      # 4. Scope vendor dependencies
+      
       - name: Scope vendor
         run: composer scope
-
-      # 5. Setup Node.js
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 20
-
-      # 6. Install Node dependencies
-      - name: Install Node.js dependencies
-        run: npm install
-
-      # 7. Run tests
+      
       - name: Run tests
         run: npm run test
-
-      # 8. Build assets
+      
       - name: Build plugin
         run: npm run build
-
-      # 9. Package plugin
-      - name: Package plugin
-        run: npm run zip   # uses your CJS or bash packaging script
-
-      # 10. Create GitHub Release and attach zip
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@v1
-        with:
-          files: release/*.zip
+      
+      - name: Run semantic-release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
